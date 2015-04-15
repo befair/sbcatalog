@@ -6,6 +6,8 @@ from eve.render import send_response
 
 from flask import request
 
+from xml2json import xml2json
+
 def xml_collections_endpoint(**lookup):
 
     resource = _resource()
@@ -13,10 +15,12 @@ def xml_collections_endpoint(**lookup):
     method = request_method()
     if request.content_type.endswith("/xml"):
         if method == "POST":
-            #TODO: translate xml to json
-            response = post(resource, payl=[{"name": "MINO", "lastname": "REITANO"}])
+            response = post(resource, payl=xml2json(request.data))
         else:
-            raise NotImplementedError("Other methods not implemented. PROBLEM: GET already implemented")
+            raise NotImplementedError(
+                "Other methods not implemented."
+                "PROBLEM: GET already implemented... use gdxp/xml?!?"
+            )
         return send_response(resource, response)
 
     else:
