@@ -15,7 +15,7 @@
 
   // filter by category
   select(ng-model="search.name")
-    option(value="" disabled selected) Seleziona la categoria
+    option(value="" selected) Seleziona la categoria
     option(value="{{ s.name }}" ng-repeat="s in suppliers") {{ s.name }}
 
 
