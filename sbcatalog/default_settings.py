@@ -7,7 +7,7 @@ MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
 MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
-MONGO_DBNAME = 'sbcatalog'
+MONGO_DBNAME = 'sbcatalog3'
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -25,6 +25,16 @@ schema = {
         'type': 'string',
         'minlength': 1,
         'maxlength': 10,
+    },
+    'taxCode': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 20,
+    },
+    'vatNumber': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 20,
     },
     'lastname': {
         'type': 'string',
