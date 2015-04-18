@@ -1,0 +1,12 @@
+doctype
+html(lang="it" ng-app="sbcatalogApp" itemscope itemtype="http://schema.org/Framework")
+  head
+    != partial("/_includes/_head-include")
+
+  body(class="l-offset-nav"  ng-controller="AppCtrl")
+    <!-- != partial("/_includes/_main-nav") TODO -->
+
+    != yield
+
+    <!-- != partial("/_includes/_footer") TODO -->
+    != partial("/_includes/_scripts-include")
