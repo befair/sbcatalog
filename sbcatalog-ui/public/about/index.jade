@@ -13,12 +13,13 @@
 
   h3.text-headline.text-uppercase.text-center Fornitori attuali
 
-  //filter by category
-  select(ng-click="filterByCategory($event)" ng-options="sup.name for sup in suppliers._items" ng-model="category")
-    option(value="") Scegli categoria
-    
+  // filter by category
+  select(ng-model="search.name")
+    option(value="" disabled selected) Seleziona la categoria
+    option(value="{{ s.name }}" ng-repeat="s in suppliers") {{ s.name }}
 
-  <!-- SUPPLIER CARDS -->
+
+  // <!-- SUPPLIER CARDS -->
   //      {{ supplier.name }} {{ supplier.lastname }}
   //    md-card(class="bio-card" data-website="#{person.website}" data-twitter="#{person.twitter}" data-pic="#{person.picture}" data-bio="#{person.bio}"  data-name="#{person.name}" ng-click="showBio($event)")
   //          if person.twitter
@@ -26,7 +27,7 @@
 
   //          if person.website
   //            a(title="website" href="#{person.website}"  ng-click="$event.stopPropagation()") <span class="icon-publ"></span>
-  .c3(ng-repeat="supplier in suppliers._items")
+  .c3(ng-repeat="supplier in suppliers | filter:search")
       md-card(class="bio-card" data-website="{{supplier.name}}" data-twitter="{{supplier.name}}" data-pic="http://www.lucaferroni.it/images/pic2.jpg" data-bio="{{supplier.name}}"  data-name="{{supplier.name}}" ng-click="showBio($event)")
         header
           image(src="http://www.lucaferroni.it/images/pic2.jpg" alt="{{supplier.name}}")

@@ -5,8 +5,8 @@
 
 var angularIO = angular.module('sbcatalogApp', ['ngMaterial'])
 .config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-    .primaryPalette('blue', {
+  $mdThemingProvider.theme('green-light');
+    /*.primaryPalette('blue', {
       'default': '700', // by default use shade 400 from the pink palette for primary intentions
       'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
       'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
@@ -16,7 +16,7 @@ var angularIO = angular.module('sbcatalogApp', ['ngMaterial'])
     // default shades
     .accentPalette('purple', {
       'default': '200' // use shade 200 for default, and keep all other shades the same
-    });
+    });*/
 
 
 });
@@ -108,20 +108,20 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
       scope.closeDialog = function() {
         $mdDialog.hide();
       };
-    }
-  };
+    } };
 
   // INITIALIZE PRETTY PRINT
   prettyPrint();
 
   // INITIALIZE ENV
   $scope.category = null;
+  $scope.search = {};
   $scope.suppliers = [];
 
   $http.get('http://localhost:5000/supplier/')
   .success(function(data) {
       $scope.all_suppliers = data;
-      $scope.suppliers = data;
+      $scope.suppliers = data._items;
       //copy categories in a var to avoid two-way binding
       //for categories selection
       $scope.categories = [];
@@ -131,7 +131,3 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
       }
   });
 }]);
-
-
-
-
