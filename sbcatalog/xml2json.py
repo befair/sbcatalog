@@ -22,7 +22,7 @@ def xml2json(xmlstring):
     """
     print(xmlstring)
     d = xmltodict.parse(xmlstring).values()[0]
-    print(d)
+    #print d
 
     # remove root element and take away root attributes
     root_attrs = {}
@@ -39,8 +39,8 @@ def xml2json(xmlstring):
 
     for v in tle:
         if isinstance(v, types.StringTypes):
-            v = OrderedDict([('#text', v)])
-        print(v)
+            v = OrderedDict({'#text': v})
+        #print(v)
         v.update(root_attrs)
 
     return d
@@ -52,6 +52,6 @@ if __name__ == "__main__":
         xmlstring = sys.stdin.read()
 
     from pprint import pprint
-    pprint(xmltodict.parse(xmlstring))
+    import json
     #pprint(xml2json(xmlstring))
-
+    print(json.dumps(xml2json(xmlstring)))
