@@ -7,7 +7,7 @@ MONGO_HOST = 'localhost'
 MONGO_PORT = 27017
 MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
-MONGO_DBNAME = 'sbcatalog3'
+MONGO_DBNAME = 'sbcatalog'
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -36,6 +36,186 @@ schema = {
         'minlength': 1,
         'maxlength': 20,
     },
+    'address': {
+        'type': 'dict',
+        'schema' : {
+            'street': {
+                'type': 'string',
+                'minlength': 1,
+                'maxlength': 20,
+            },
+            'locality': {
+                'type': 'string',
+                'minlength': 1,
+                'maxlength': 20,
+            },
+            'zipcode': {
+                'type': 'string',
+                'minlength': 1,
+                'maxlength': 20,
+            },
+            'country': {
+                'type': 'string',
+                'minlength': 1,
+                'maxlength': 20,
+            }
+        }
+    },
+    'contacts': {
+        'type': 'dict',
+        'schema' : {
+    'contact' : {
+        'type': 'dict',
+        'schema' : {
+            'primary' : {
+                'type' : 'dict',
+                'schema' : {
+                    'phoneNumber': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'faxNumber': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'emailAddress': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'webSite': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    }
+                }
+            },
+            'extraContact' : {
+                'type' : 'dict',
+                'schema' : {
+                    'firstName': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'lastName': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'phoneNumber': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'mobileNumber': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'faxNumber': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    },
+                    'emailAddress': {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 20,
+                    }
+                }
+            }
+        }
+    }
+    }
+    },
+    #'products': {
+    #    'type': 'dict',
+    #    'schema' : {
+    #'product' : {
+    #    'type': 'dict',
+    #    'schema' : {
+    #        'sku' : {
+    #            'type': 'string',
+    #            'minlength': 1,
+    #            'maxlength': 15,
+    #        },
+    #        'name' : {
+    #            'type': 'string',
+    #            'minlength': 1,
+    #            'maxlength': 15,
+    #        },
+    #        'category' : {
+    #            'type': 'string',
+    #            'minlength': 1,
+    #            'maxlength': 15,
+    #        },
+    #        'um' : {
+    #            'type': 'string',
+    #            'minlength': 1,
+    #            'maxlength': 15,
+    #        },
+    #        'description' : {
+    #            'type': 'string',
+    #            'minlength': 1,
+    #            'maxlength': 15,
+    #        },
+    #        'orderInfo' : {
+    #            'type' : 'dict',
+    #            'schema': {
+    #                'packageQty' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                },
+    #                'minQty' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                },
+    #                'mulQty' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                },
+    #                'maxQty' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                },
+    #                'umPrice' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                },
+    #                'shippingCost' : {
+    #                    'type': 'string',
+    #                    'minlength': 1,
+    #                    'maxlength': 15,
+    #                }
+    #            }
+    #        },
+    #        #'variants' : {
+    #        #    'type' : 'dict',
+    #        #    'schema' : {
+    #        #        'extraFields' : {
+    #        #            'type' : 'dict',
+    #        #            'schema' : {
+    #        #                'extraField': {
+    #        #                    'type': 'string',
+    #        #                    'minlength': 1,
+    #        #                    'maxlength': 20,
+    #        #                }
+    #        #            }
+    #        #        }
+    #        #    }
+    #        #}
+    #    }
+    #}
+    #}
+    #},
     'lastname': {
         'type': 'string',
         'minlength': 1,
@@ -54,9 +234,9 @@ schema = {
     'location': {
         'type': 'dict',
         'schema': {
-        'address': {'type': 'string'},
-        'city': {'type': 'string'}
-    },
+            'address': {'type': 'string'},
+            'city': {'type': 'string'}
+        },
     },
     'born': {
         'type': 'datetime',
