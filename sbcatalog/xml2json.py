@@ -20,9 +20,8 @@ def xml2json(xmlstring):
     - Strip the root element
     - Move the root attributes to each element of the collection
     """
-    print(xmlstring)
+    #print(xmlstring)
     d = xmltodict.parse(xmlstring).values()[0]
-    #print d
 
     # remove root element and take away root attributes
     root_attrs = {}
@@ -40,10 +39,13 @@ def xml2json(xmlstring):
     for v in tle:
         if isinstance(v, types.StringTypes):
             v = OrderedDict({'#text': v})
-        #print(v)
         v.update(root_attrs)
 
-    return d
+    rv = d.values()[0]
+    if not isinstance(rv, list):
+        rv  = [rv]
+
+    return rv
 
 if __name__ == "__main__":
     try:
@@ -53,5 +55,6 @@ if __name__ == "__main__":
 
     from pprint import pprint
     import json
-    #pprint(xml2json(xmlstring))
-    print(json.dumps(xml2json(xmlstring)))
+    pprint(json.loads(
+        json.dumps(xml2json(xmlstring))
+    ))
