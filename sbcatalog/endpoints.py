@@ -5,9 +5,11 @@ from eve.methods import post
 from eve.render import send_response
 
 from flask import request
+from utils import crossdomain
 
 from xml2json import xml2json
 
+@crossdomain(origin='*')
 def xml_collections_endpoint(**lookup):
 
     resource = _resource()
