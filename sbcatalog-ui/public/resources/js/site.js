@@ -64,28 +64,6 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
 
     function DialogController(scope, $mdDialog, supplier) {
       scope.s = supplier;
-      scope.s.products = [
-        {
-          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
-          name: "biscotti",
-          surname: "buoni"
-        },
-        {
-          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
-          name: "biscotti",
-          surname: "gustose"
-        },
-        {
-          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
-          name: "patatine2",
-          surname: "aiaaaa"
-        },
-        {
-          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
-          name: "coffee",
-          surname: "hot"
-        }
-      ];
       scope.closeDialog = function() {
         $mdDialog.hide();
       };

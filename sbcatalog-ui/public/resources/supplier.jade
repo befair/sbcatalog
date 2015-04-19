@@ -7,7 +7,7 @@ md-dialog.modal(aria-label="List dialog")
 
     md-list
       md-subheader.md-no-sticky X prodotti
-      md-list-item.md-2-line(ng-repeat="p in s.products")
+      md-list-item.md-2-line(ng-repeat="p in s.products.product")
         img.md-avatar(ng-src="{{ ::p.img }}")
         .md-list-item-text
           h3 {{ ::p.name }}
