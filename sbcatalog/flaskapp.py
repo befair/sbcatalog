@@ -21,9 +21,11 @@ class XMLEve(Eve):
         resource = 'supplier'
         endpoint = resource + "|resource"
         self.view_functions[endpoint] = xml_collections_endpoint
+        settings = self.config['DOMAIN'][resource]
+        self.add_url_rule(self.api_prefix + '/gdxp/supplier', endpoint ,
+                view_func=xml_collections_endpoint, methods=settings['resource_methods'] + ['OPTIONS'])
 
         # MAY BE USEFUL
-        #settings = self.config['DOMAIN'][resource]
         #url = '%s/%s' % (self.api_prefix, settings['url'])                                                                             
         #self.add_url_rule(url, endpoint, view_func=gdxp_collections_endpoint,
         #    methods=settings['resource_methods'] + ['OPTIONS'])
