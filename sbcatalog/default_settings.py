@@ -64,158 +64,158 @@ schema = {
     'contacts': {
         'type': 'dict',
         'schema' : {
-    'contact' : {
-        'type': 'dict',
-        'schema' : {
-            'primary' : {
-                'type' : 'dict',
+            'contact' : {
+                'type': 'dict',
                 'schema' : {
-                    'phoneNumber': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
+                    'primary' : {
+                        'type' : 'dict',
+                        'schema' : {
+                            'phoneNumber': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'faxNumber': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'emailAddress': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'webSite': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            }
+                        }
                     },
-                    'faxNumber': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'emailAddress': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'webSite': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    }
-                }
-            },
-            'extraContact' : {
-                'type' : 'dict',
-                'schema' : {
-                    'firstName': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'lastName': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'phoneNumber': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'mobileNumber': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'faxNumber': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
-                    },
-                    'emailAddress': {
-                        'type': 'string',
-                        'minlength': 1,
-                        'maxlength': 20,
+                    'extraContact' : {
+                        'type' : 'dict',
+                        'schema' : {
+                            'firstName': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'lastName': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'phoneNumber': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'mobileNumber': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'faxNumber': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            },
+                            'emailAddress': {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 20,
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-    }
     },
-    #'products': {
-    #    'type': 'dict',
-    #    'schema' : {
-    #'product' : {
-    #    'type': 'dict',
-    #    'schema' : {
-    #        'sku' : {
-    #            'type': 'string',
-    #            'minlength': 1,
-    #            'maxlength': 15,
-    #        },
-    #        'name' : {
-    #            'type': 'string',
-    #            'minlength': 1,
-    #            'maxlength': 15,
-    #        },
-    #        'category' : {
-    #            'type': 'string',
-    #            'minlength': 1,
-    #            'maxlength': 15,
-    #        },
-    #        'um' : {
-    #            'type': 'string',
-    #            'minlength': 1,
-    #            'maxlength': 15,
-    #        },
-    #        'description' : {
-    #            'type': 'string',
-    #            'minlength': 1,
-    #            'maxlength': 15,
-    #        },
-    #        'orderInfo' : {
-    #            'type' : 'dict',
-    #            'schema': {
-    #                'packageQty' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                },
-    #                'minQty' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                },
-    #                'mulQty' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                },
-    #                'maxQty' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                },
-    #                'umPrice' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                },
-    #                'shippingCost' : {
-    #                    'type': 'string',
-    #                    'minlength': 1,
-    #                    'maxlength': 15,
-    #                }
-    #            }
-    #        },
-    #        #'variants' : {
-    #        #    'type' : 'dict',
-    #        #    'schema' : {
-    #        #        'extraFields' : {
-    #        #            'type' : 'dict',
-    #        #            'schema' : {
-    #        #                'extraField': {
-    #        #                    'type': 'string',
-    #        #                    'minlength': 1,
-    #        #                    'maxlength': 20,
-    #        #                }
-    #        #            }
-    #        #        }
-    #        #    }
-    #        #}
-    #    }
-    #}
-    #}
-    #},
+    'products': {
+        'type': 'dict',
+        'schema' : {
+            'product' : {
+                'type': 'dict',
+                'schema' : {
+                    'sku' : {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 15,
+                    },
+                    'name' : {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 15,
+                    },
+                    'category' : {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 15,
+                    },
+                    'um' : {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 15,
+                    },
+                    'description' : {
+                        'type': 'string',
+                        'minlength': 1,
+                        'maxlength': 15,
+                    },
+                    'orderInfo' : {
+                        'type' : 'dict',
+                        'schema': {
+                            'packageQty' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            },
+                            'minQty' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            },
+                            'mulQty' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            },
+                            'maxQty' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            },
+                            'umPrice' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            },
+                            'shippingCost' : {
+                                'type': 'string',
+                                'minlength': 1,
+                                'maxlength': 15,
+                            }
+                        }
+                    },
+                    'variants' : {
+                        'type' : 'dict',
+                        'schema' : {
+                            'extraFields' : {
+                                'type' : 'dict',
+                                'schema' : {
+                                    'extraField': {
+                                        'type': 'string',
+                                        'minlength': 1,
+                                        'maxlength': 20,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     'lastname': {
         'type': 'string',
         'minlength': 1,
