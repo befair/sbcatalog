@@ -11,31 +11,21 @@
 
 .grid-fluid.l-space-bottom-6
 
-  h3.text-headline.text-uppercase.text-center Fornitori attuali
-
   // filter by category
   select(ng-model="search.name")
     option(value="" selected) Seleziona la categoria
     option(value="{{ s.name }}" ng-repeat="s in suppliers") {{ s.name }}
 
+  h3.text-headline.text-uppercase.text-center Fornitori attuali
 
-  // <!-- SUPPLIER CARDS -->
-  //      {{ supplier.name }} {{ supplier.lastname }}
-  //    md-card(class="bio-card" data-website="#{person.website}" data-twitter="#{person.twitter}" data-pic="#{person.picture}" data-bio="#{person.bio}"  data-name="#{person.name}" ng-click="showBio($event)")
-  //          if person.twitter
-  //            a(title="twitter" href="https://twitter.com/#{person.twitter}" ng-click="$event.stopPropagation()") <span class="icon-twitter"></span>
-
-  //          if person.website
-  //            a(title="website" href="#{person.website}"  ng-click="$event.stopPropagation()") <span class="icon-publ"></span>
-  .c3(ng-repeat="supplier in suppliers | filter:search")
-      md-card(class="bio-card" data-website="{{supplier.name}}" data-twitter="{{supplier.name}}" data-pic="http://www.lucaferroni.it/images/pic2.jpg" data-bio="{{supplier.name}}"  data-name="{{supplier.name}}" ng-click="showBio($event)")
+  // suppliers list
+  .c3(ng-repeat="s in suppliers | filter:search")
+      md-card.bio-card(ng-click="showBio($event, $index)")
         header
-          image(src="http://www.lucaferroni.it/images/pic2.jpg" alt="{{supplier.name}}")
-
+          img(src="http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" alt="{{ ::s.name }}")
           nav
             button(aria-label="View Catalog") View Catalog
 
-
         md-card-content
-          h3.text-headline.bio-card-name {{supplier.lastname}}
-          p(class="bio-card-content text-body") {{supplier.name}}
+          h3.text-headline.bio-card-name {{ ::s.lastname }}
+          p(class="bio-card-content text-body") {{ ::s.name }}

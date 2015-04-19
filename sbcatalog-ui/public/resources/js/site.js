@@ -22,11 +22,6 @@ var angularIO = angular.module('sbcatalogApp', ['ngMaterial'])
 });
 
 
-/*
-* Apllication Controller
-*
-*/
-
 angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', function($scope, $mdDialog, $http, $rootScope){
 
   // TOGGLE MAIN NAV (TOP) ON MOBILE
@@ -44,32 +39,9 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
     $scope.showMenu = !$scope.showMenu;
   };
 
-  // FILTER BY CATEGORY CSS ATTR
-  // THE JQUERY MODE
-  $scope.filterByCategory = function(event) {
-    if (category) {
-        angular.element('.bio-card').css('display', 'none');
-        var selector = '.bio-card[category=' + category + ']';
-        angular.element(selector).css('display', 'block');
-    }
-  };
-
-  // FILTER BY CATEGORY CSS ATTR
-  // THE ANGULAR MODE
-  $scope.filterByCategory = function(event) {
-      if ($scope.category) {
-          var sups_by_category = [];
-          var sup;
-          for ( sup in $scope.all_suppliers._items) {
-              if (sup.name == $scope.category) {
-                  sups_by_category.push(sup);
-              }
-          }
-          $scope.suppliers._items = sups_by_category;
-      }
-  };
   // BIO MODAL
-  $scope.showBio = function($event) {
+  $scope.showBio = function($event, $index) {
+    var index = $index;
     var parentEl = angular.element(document.body);
     var person = angular.element($event.currentTarget);
     var name = person.attr('data-name');
@@ -83,50 +55,58 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
     $mdDialog.show({
       parent: parentEl,
       targetEvent: $event,
-      template:
-        '<md-dialog class="modal" aria-label="List dialog">' +
-        '  <md-content>' +
-        '     <img class="left" src="' + pic + '" />' +
-        '     <h3 class="text-headline">' + name + '</h3>' +
-        '     <div class="modal-social">' + $twitter + $website + '</div>' +
-        '     <p class="text-body">' + bio + '</p>' +
-        '  </md-content>' +
-        '  <div class="md-actions">' +
-        '    <md-button ng-click="closeDialog()">' +
-        '      Close Bio' +
-        '    </md-button>' +
-        '  </div>' +
-        '</md-dialog>',
+      templateUrl: "resources/supplier.html",
       locals: {
-        items: $scope.items
+        supplier: $scope.suppliers[$index]
       },
-    controller: DialogController
+      controller: DialogController
     });
 
-    function DialogController(scope, $mdDialog, items) {
-      scope.items = items;
+    function DialogController(scope, $mdDialog, supplier) {
+      scope.s = supplier;
+      scope.s.products = [
+        {
+          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
+          name: "biscotti",
+          surname: "buoni"
+        },
+        {
+          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
+          name: "biscotti",
+          surname: "gustose"
+        },
+        {
+          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
+          name: "patatine2",
+          surname: "aiaaaa"
+        },
+        {
+          img: "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png",
+          name: "coffee",
+          surname: "hot"
+        }
+      ];
       scope.closeDialog = function() {
         $mdDialog.hide();
       };
-    } };
+    }
+  };
 
   // INITIALIZE PRETTY PRINT
   prettyPrint();
 
   // INITIALIZE ENV
-  $scope.category = null;
   $scope.search = {};
   $scope.suppliers = [];
 
   $http.get('http://localhost:5000/supplier/')
   .success(function(data) {
-      $scope.all_suppliers = data;
       $scope.suppliers = data._items;
       //copy categories in a var to avoid two-way binding
       //for categories selection
       $scope.categories = [];
       var sup;
-      for ( sup in $scope.all_suppliers._items) {
+      for ( sup in $scope.suppliers) {
           $scope.categories.push(sup.name);
       }
   });

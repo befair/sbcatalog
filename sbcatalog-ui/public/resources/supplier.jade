@@ -1,0 +1,18 @@
+md-dialog.modal(aria-label="List dialog")
+  md-content
+    img.left(src="http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" alt="{{ ::s.name }}" width=500 height=150)
+    h3.text-headline {{ ::s.name }}
+    .modal-social qualcosa di social
+    p.text-body bio
+
+    md-list
+      md-subheader.md-no-sticky X prodotti
+      md-list-item.md-2-line(ng-repeat="p in s.products")
+        img.md-avatar(ng-src="{{ ::p.img }}")
+        .md-list-item-text
+          h3 {{ ::p.name }}
+          p {{ ::p.name }}
+        md-icon.md-secondary prezzo
+
+  .md-actions
+    md-button(ng-click="closeDialog()") Close Bio
