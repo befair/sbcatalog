@@ -77,7 +77,7 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
   $scope.search = {};
   $scope.suppliers = [];
 
-  $http.get('http://localhost:5000/supplier/')
+  $http.get('http://api.sbcatalog.labs.befair.it/supplier/')
   .success(function(data) {
       $scope.suppliers = data._items;
       //copy categories in a var to avoid two-way binding

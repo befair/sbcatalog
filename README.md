@@ -1,6 +1,6 @@
 # Social Business Catalog
 
-[Social Business Catalog](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API 
+[Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API 
 per fornitori e prodotti dell'economia solidale.
 
 ### Perché
@@ -19,6 +19,8 @@ SBcatalog propone:
 
 Visione d'insieme dove AGGREGATOR = SBCatalog:
 ![Visione d'insieme](./docs/SBCatalog_comprehensive_view.png "Visione d'insieme")
+
+Lo schema è stato preso dalla tesi di Matteo Micheletti "Definition and implementation of a data exchange and share standard between solidarity-based group management programmes"
 
 **NOTA**: i nomi dei siti/software sono solo a titolo esemplificativo e non esaustivo, per una lista completa si veda il [wikibook GAS ed Economia Solidale](http://it.wikibooks.org/wiki/GAS_ed_Economia_solidale/Gruppo_d%27Acquisto_Solidale#Scegliere_un_gestionale_.28comparazione.29)
 
@@ -51,7 +53,7 @@ Grazie a tutti quelli che ci provano
 
 [Il team beFair](http://www.befair.it)
 
-## INSTALL
+## Installazione
 
 ### Server
 
@@ -69,4 +71,15 @@ Grazie a tutti quelli che ci provano
 ### Utilizzo API
 
     $ curl -d @<file.gdxp> -H "Content-type: text/xml" http://locallhost:5000/gdxp/supplier/
+
+## Autori
+
+* Luca Ferroni
+* Matteo Micheletti
+* Antonio Esposito
+* Michele Sorcinelli
+
+## Licenza
+
+[GNU AGPLv3](./LICENSE.md)                                                                    
 
