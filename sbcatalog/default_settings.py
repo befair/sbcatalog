@@ -38,7 +38,7 @@ schema = {
     },
     'address': {
         'type': 'dict',
-        'schema' : {
+        'schema': {
             'street': {
                 'type': 'string',
                 'minlength': 1,
@@ -63,13 +63,13 @@ schema = {
     },
     'contacts': {
         'type': 'dict',
-        'schema' : {
-            'contact' : {
+        'schema': {
+            'contact': {
                 'type': 'dict',
-                'schema' : {
-                    'primary' : {
-                        'type' : 'dict',
-                        'schema' : {
+                'schema': {
+                    'primary': {
+                        'type': 'dict',
+                        'schema': {
                             'phoneNumber': {
                                 'type': 'string',
                                 'minlength': 1,
@@ -92,9 +92,9 @@ schema = {
                             }
                         }
                     },
-                    'extraContact' : {
-                        'type' : 'dict',
-                        'schema' : {
+                    'extraContact': {
+                        'type': 'dict',
+                        'schema': {
                             'firstName': {
                                 'type': 'string',
                                 'minlength': 1,
@@ -133,76 +133,76 @@ schema = {
     },
     'products': {
         'type': 'dict',
-        'schema' : {
-            'product' : {
+        'schema': {
+            'product': {
                 'type': 'dict',
-                'schema' : {
-                    'sku' : {
+                'schema': {
+                    'sku': {
                         'type': 'string',
                         'minlength': 1,
                         'maxlength': 15,
                     },
-                    'name' : {
+                    'name': {
                         'type': 'string',
                         'minlength': 1,
                         'maxlength': 15,
                     },
-                    'category' : {
+                    'category': {
                         'type': 'string',
                         'minlength': 1,
                         'maxlength': 15,
                     },
-                    'um' : {
+                    'um': {
                         'type': 'string',
                         'minlength': 1,
                         'maxlength': 15,
                     },
-                    'description' : {
+                    'description': {
                         'type': 'string',
                         'minlength': 1,
                         'maxlength': 15,
                     },
-                    'orderInfo' : {
-                        'type' : 'dict',
+                    'orderInfo': {
+                        'type': 'dict',
                         'schema': {
-                            'packageQty' : {
+                            'packageQty': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             },
-                            'minQty' : {
+                            'minQty': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             },
-                            'mulQty' : {
+                            'mulQty': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             },
-                            'maxQty' : {
+                            'maxQty': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             },
-                            'umPrice' : {
+                            'umPrice': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             },
-                            'shippingCost' : {
+                            'shippingCost': {
                                 'type': 'string',
                                 'minlength': 1,
                                 'maxlength': 15,
                             }
                         }
                     },
-                    'variants' : {
-                        'type' : 'dict',
-                        'schema' : {
-                            'extraFields' : {
-                                'type' : 'dict',
-                                'schema' : {
+                    'variants': {
+                        'type': 'dict',
+                        'schema': {
+                            'extraFields': {
+                                'type': 'dict',
+                                'schema': {
                                     'extraField': {
                                         'type': 'string',
                                         'minlength': 1,
@@ -221,7 +221,7 @@ schema = {
 supplier = {
     # 'title' tag used in item links. Defaults to the resource title minus
     # the final, plural 's' (works fine in most cases but not for 'people')
-    #'item_title': 'person',
+    # 'item_title': 'person',
 
     # by default the standard item entry point is defined as
     # '/people/<ObjectId>'. We leave it untouched, and we also enable an
@@ -243,4 +243,4 @@ supplier = {
 }
 
 
-DOMAIN = { 'supplier': supplier }
+DOMAIN = {'supplier': supplier}

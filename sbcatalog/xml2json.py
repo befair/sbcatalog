@@ -7,11 +7,13 @@ in other ways in future...
 
 import xmltodict
 # other package = xml2dict
-# import decoder 
+# import decoder
 # xmltodict = XML2Dict()
 
-import sys, types
+import sys
+import types
 from collections import OrderedDict
+
 
 def xml2json(xmlstring):
     """
@@ -20,12 +22,12 @@ def xml2json(xmlstring):
     - Strip the root element
     - Move the root attributes to each element of the collection
     """
-    #print(xmlstring)
+    # print(xmlstring)
     d = xmltodict.parse(xmlstring).values()[0]
 
     # remove root element and take away root attributes
     root_attrs = {}
-    for k,v in d.items():
+    for k, v in d.items():
         if k.startswith('@'):
             root_attrs[k] = d.pop(k)
 
@@ -43,7 +45,7 @@ def xml2json(xmlstring):
 
     rv = d.values()[0]
     if not isinstance(rv, list):
-        rv  = [rv]
+        rv = [rv]
 
     return rv
 
