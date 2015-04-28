@@ -1,6 +1,6 @@
 # Social Business Catalog
 
-[Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API 
+[Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API
 per fornitori e prodotti dell'economia solidale.
 
 ### Perché
@@ -44,7 +44,7 @@ In particolare OGGI il contesto è costituito da questi elementi:
     * utenti e interfaccia web di modifica delle anagrafiche e dei listini e API per la sincronizzazione con i vari software per i GAS
     * import (o possibilità di) "rating" dei fornitori e prodotti fatto su altre piattaforme
 
-**Ora l'obiettivo è di fare un proof-of-concept per dire che "SI... PUÒ... FARE!!"**, ma anche **LO STIAMO FACENDO!**. 
+**Ora l'obiettivo è di fare un proof-of-concept per dire che "SI... PUÒ... FARE!!"**, ma anche **LO STIAMO FACENDO!**.
 
 Sì perché l'economia solidale è questo, è inventarsi modi nuovi, è riscoprire le relazioni, è superare delle sfide
 e ormai in molti lo stiamo facendo. Con leggerezza, dedizione e costanza: e ce la stiamo facendo.
@@ -52,6 +52,12 @@ e ormai in molti lo stiamo facendo. Con leggerezza, dedizione e costanza: e ce l
 Grazie a tutti quelli che ci provano
 
 [Il team beFair](http://www.befair.it)
+
+## Prerequisiti
+
+* Installare mongo ed npm (su Debian: sudo apt-get install mongodb npm)
+* Su Debian, creare un symlink per l'eseguibile di node (sudo ln -s /usr/bin/nodejs /usr/bin/node)
+* Installare harp con npm (sudo npm install -g harp)
 
 ## Installazione
 
@@ -81,5 +87,5 @@ Grazie a tutti quelli che ci provano
 
 ## Licenza
 
-[GNU AGPLv3](./LICENSE.md)                                                                    
+[GNU AGPLv3](./LICENSE.md)
 
