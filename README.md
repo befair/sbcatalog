@@ -76,7 +76,7 @@ Grazie a tutti quelli che ci provano
 
 ### Utilizzo API
 
-    $ curl -d @<file.gdxp> -H "Content-type: text/xml" http://locallhost:5000/gdxp/supplier/
+    $ curl -d @<file.gdxp> -H "Content-type: text/xml" http://localhost:5000/gdxp/supplier/
 
 ## Autori
 
