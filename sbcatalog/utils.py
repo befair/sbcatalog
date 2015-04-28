@@ -15,7 +15,7 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600,
         max_age = max_age.total_seconds()
 
     def get_methods():
-        if methods is not None:
+        if methods:
             return methods
 
         options_resp = current_app.make_default_options_response()
@@ -35,10 +35,11 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600,
             h['Access-Control-Allow-Origin'] = origin
             h['Access-Control-Allow-Methods'] = get_methods()
             h['Access-Control-Max-Age'] = str(max_age)
-            if headers is not None:
+            if headers:
                 h['Access-Control-Allow-Headers'] = headers
             return resp
 
         f.provide_automatic_options = False
         return update_wrapper(wrapped_function, f)
+
     return decorator
