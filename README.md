@@ -81,8 +81,9 @@ Grazie a tutti quelli che ci provano
 ## Autori
 
 * Luca Ferroni
-* Matteo Micheletti
+* Andrea Colangelo
 * Antonio Esposito
+* Matteo Micheletti
 * Michele Sorcinelli
 
 ## Licenza
