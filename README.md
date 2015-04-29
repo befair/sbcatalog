@@ -88,7 +88,7 @@ Grazie a tutti quelli che ci provano
 
 ## License
 
-sbcatalog is Copyright © 2015 beFair.it
+Social Business Catalog is Copyright © 2015 beFair.it
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License version 3, as published by
@@ -101,4 +101,3 @@ Affero General Public License for more details.
 
 You should have received a [copy of the GNU Affero General Public License](./LICENSE.md)
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
