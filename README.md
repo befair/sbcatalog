@@ -76,7 +76,19 @@ Grazie a tutti quelli che ci provano
 
 ### Utilizzo API
 
-    $ curl -d @<file.gdxp> -H "Content-type: text/xml" http://localhost:5000/gdxp/supplier/
+Tramite API è possibile interagire con il database dei fornitori in questo modo:
+
+1. Inserire nuovi fornitori con i relativi cataloghi prodotti:
+
+    `$ curl -XPOST -d @<file.gdxp> -H "Content-type: text/xml" http://api.sbcatalog.labs.befair.it/gdxp/supplier/`
+
+2. Scaricare tutti i fornitori e i cataloghi prodotti in formato GDXP:
+
+    `$ curl -XGET -H "Content-type: text/xml" http://api.sbcatalog.labs.befair.it/gdxp/supplier/`
+
+3. Scaricare tutti i fornitori e i cataloghi prodotti in formato JSON:
+
+    `$ curl -XGET -H "Content-type: application/json" http://api.sbcatalog.labs.befair.it/supplier/`
 
 ## Autori
 
