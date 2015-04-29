@@ -131,6 +131,10 @@ schema = {
             }
         }
     },
+    'logo': {
+        'type': 'string',
+        'minlength': 1,
+    },
     'products': {
         'type': 'dict',
         'schema': {

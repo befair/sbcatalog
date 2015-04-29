@@ -1,6 +1,6 @@
 md-dialog.modal(aria-label="List dialog")
   md-content
-    img.left(src="http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" alt="{{ ::s.name }}" width=500 height=150)
+    img.left(ng-src="{{ ::s.logo || 'http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png'}}" alt="{{ ::s.name }}" width=500 height=150)
     h3.text-headline {{ ::s.name }}
     .modal-social qualcosa di social
     p.text-body bio
