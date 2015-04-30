@@ -45,10 +45,10 @@ def xml_collections_endpoint(**lookup):
             response = post_internal(resource, payl=xml2json(request.data), skip_validation=True)
         elif method == "GET":
             response = collections_endpoint(**lookup)
-            l = json.loads(response.data)['_items']
+            l = json.loads(response.data.decode('utf-8'))['_items']
             response.data = xmltodict.unparse({
                 'gdxp': {
-                    "supplier": map(popper, l)
+                    "supplier": list(map(popper, l))
                 }
             })
         else:

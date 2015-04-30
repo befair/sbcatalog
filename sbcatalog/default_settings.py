@@ -9,6 +9,9 @@ MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
 MONGO_DBNAME = 'sbcatalog'
 
+# GET Request will return all the results instead of a restricted set
+PAGINATION = False
+
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
 # read-only access to the endpoint).

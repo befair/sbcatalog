@@ -22,15 +22,6 @@
 
   h3.text-headline.text-uppercase.text-center Fornitori attuali
 
-  // suppliers pagination
-  div(style="display: none")
-      p pagination: {{ pagination }}
-      p actual_page: {{ actual_page }}
-      p total_suppliers: {{ total_suppliers }}
-      p pages: {{ pages }}
-      p pages_number: {{ pages_number }}
-      p suppliers_filtered: {{ suppliers_filtered }}
-
   // suppliers list
   .c3(ng-repeat="s in suppliers_filtered | filter:search")
       md-card.bio-card(ng-click="showBio($event, $index)")

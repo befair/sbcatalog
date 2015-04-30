@@ -39,7 +39,7 @@ def xml2json(xmlstring):
     - Move the root attributes to each element of the collection
     """
     # print(xmlstring)
-    d = xmltodict.parse(xmlstring).values()[0]
+    d = list(xmltodict.parse(xmlstring).values())[0]
 
     # remove root element and take away root attributes
     root_attrs = {}
@@ -48,18 +48,18 @@ def xml2json(xmlstring):
             root_attrs[k] = d.pop(k)
 
     # Append root_attrs to each top-level element
-    tle = d.values()
+    tle = list(d.values())
     try:
         tle = tle[0]
     except:
         pass
 
     for v in tle:
-        if isinstance(v, types.StringTypes):
+        if isinstance(v, str):
             v = OrderedDict({'#text': v})
         v.update(root_attrs)
 
-    rv = d.values()[0]
+    rv = list(d.values())[0]
     if not isinstance(rv, list):
         rv = [rv]
 
