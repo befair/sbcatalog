@@ -1,5 +1,5 @@
 /*
-* Apllication Module
+* Application Module
 *
 */
 
@@ -77,7 +77,8 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
   $scope.search = {};
   $scope.suppliers = [];
 
-  $http.get('http://api.sbcatalog.labs.befair.it/supplier/')
+  //$http.get('http://api.sbcatalog.labs.befair.it/supplier/')
+  $http.get('http://localhost:5000/supplier/')
   .success(function(data) {
       $scope.suppliers = data._items;
       //copy categories in a var to avoid two-way binding
@@ -87,5 +88,19 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
       for ( sup in $scope.suppliers) {
           $scope.categories.push(sup.name);
       }
+      $scope.pagination = 30;
+      $scope.total_suppliers = $scope.suppliers.length;
+      $scope.pages_number = Math.ceil($scope.total_suppliers / $scope.pagination);
+      $scope.pages = [];
+      for (var i=1; i <= $scope.pages_number; i++) {
+          $scope.pages.push(i);
+      }
+
+      $scope.setPageNumber = function(page) {
+        $scope.actual_page = page;
+        $scope.suppliers_filtered = $scope.suppliers.slice((page-1)*$scope.pagination, page*$scope.pagination);
+      }
+
+      $scope.setPageNumber(1);
   });
 }]);
