@@ -55,9 +55,19 @@ Grazie a tutti quelli che ci provano
 
 ## Prerequisiti
 
-* Installare mongo ed npm (su Debian: sudo apt-get install mongodb npm)
-* Su Debian, creare un symlink per l'eseguibile di node (sudo ln -s /usr/bin/nodejs /usr/bin/node)
-* Installare harp con npm (sudo npm install -g harp)
+È richiesto Python 3.4+, quindi Debian 8+, Ubuntu 14.04+ o Arch.
+
+Su Debian/Ubuntu, installare Python 3, MongoDB ed NPM:
+
+    sudo apt install python3 mongodb npm
+
+Creare un symlink per l'eseguibile di node:
+
+    sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+Installare Harp con NPM:
+
+    sudo npm install -g harp
 
 ## Installazione
 
