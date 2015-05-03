@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 
 # Let's just use the local mongod instance. Edit as needed.
 
