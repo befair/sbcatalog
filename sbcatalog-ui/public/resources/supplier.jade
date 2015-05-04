@@ -5,15 +5,13 @@ md-dialog.modal(aria-label="List dialog")
     //.modal-social qualcosa di social
     //p.text-body bio
 
-    label Show Prices 
-    input(type="checkbox" ng-model="checked" ng-init="checked=false")
     md-list
       //md-subheader.md-no-sticky X prodotti
       md-list-item.md-2-line(ng-repeat="p in s.products.product")
         //img.md-avatar(ng-src="{{ ::p.img }}")
         .md-list-item-text
           h3 {{ ::p.name }}
-          p(ng-if="checked") {{ ::p.orderInfo.umPrice | customCurrency:'€' }}
+          p {{ ::p.orderInfo.umPrice | customCurrency:'€' }}
         //md-icon.md-secondary prezzo
 
   .md-actions
