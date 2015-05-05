@@ -11,7 +11,7 @@ md-dialog.modal(aria-label="List dialog")
         //img.md-avatar(ng-src="{{ ::p.img }}")
         .md-list-item-text
           h3 {{ ::p.name }}
-          p(ng-show="false") {{ ::p.orderInfo.umPrice | customCurrency:'€' }}
+          p(ng-show="{{::showPrices}}") {{ ::p.orderInfo.umPrice | customCurrency:'€' }}
         //md-icon.md-secondary prezzo
 
   .md-actions

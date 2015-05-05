@@ -3,6 +3,10 @@
 *
 */
 
+// settings
+// show prices
+var SHOW_PRICES = false;
+
 var angularIO = angular.module('sbcatalogApp', ['ngMaterial'])
 // filter to format currency
 .filter("customCurrency", function() {
@@ -71,6 +75,7 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
 
     function DialogController(scope, $mdDialog, supplier) {
       scope.s = supplier;
+      scope.showPrices = SHOW_PRICES;
       scope.closeDialog = function() {
         $mdDialog.hide();
       };
