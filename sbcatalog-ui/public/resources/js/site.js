@@ -57,7 +57,7 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
       targetEvent: $event,
       templateUrl: "resources/supplier.html",
       locals: {
-        supplier: $scope.suppliers[$index]
+        supplier: $scope.suppliers_filtered[$index]
       },
       controller: DialogController
     });
