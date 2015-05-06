@@ -57,7 +57,7 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
       targetEvent: $event,
       templateUrl: "resources/supplier.html",
       locals: {
-        supplier: $scope.suppliers[$index]
+        supplier: $scope.suppliers[$scope.pagination * ($scope.actual_page-1) + $index] //FIXME: This is broken when a filter is selected
       },
       controller: DialogController
     });
