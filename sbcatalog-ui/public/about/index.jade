@@ -24,7 +24,7 @@
 
   // suppliers list
   .c3(ng-repeat="s in suppliers_filtered | filter:search")
-      md-card.bio-card(ng-click="showBio($event, $index)")
+      md-card.bio-card(ng-click="showBio($event, s)")
         header
           img(src="http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" alt="{{ ::s.name }}")
           nav

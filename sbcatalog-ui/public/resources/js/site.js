@@ -40,8 +40,8 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
   };
 
   // BIO MODAL
-  $scope.showBio = function($event, $index) {
-    var index = $index;
+  $scope.showBio = function($event, s) {
+    //var index = $index;
     var parentEl = angular.element(document.body);
     var person = angular.element($event.currentTarget);
     var name = person.attr('data-name');
@@ -52,12 +52,13 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
     var $twitter = twitter !== 'undefined' ? '<a class="button button-subtle button-small" href="https://twitter.com/' +  person.attr('data-twitter') + '" md-button>Twitter</a>' : '';
     var $website = website !== 'undefined' ? '<a class="button button-subtle button-small" href="' + person.attr('data-website') + '" md-button>Website</a>' : '';
 
+    console.log(s);
     $mdDialog.show({
       parent: parentEl,
       targetEvent: $event,
       templateUrl: "resources/supplier.html",
       locals: {
-        supplier: $scope.suppliers_filtered[$index]
+        supplier: s
       },
       controller: DialogController
     });
