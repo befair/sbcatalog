@@ -2,6 +2,7 @@ from http import client
 import xmltodict, json, codecs
 
 conn = client.HTTPConnection('localhost', 5000)
+supplier_file = 'test_data.gdxp'
 
 def assertCode(response, expected_code=200):
     """ Assert that response code is the expected """
@@ -9,8 +10,11 @@ def assertCode(response, expected_code=200):
 
 def test_post_gdxp():
     """ POST test for importing gdxp suppliers data """
-    f = codecs.open('test_data.gdxp', 'r', 'utf-8')
-    xml = f.read().encode('utf-8')
+    try:
+        with codecs.open(supplier_file, 'r', 'utf-8') as f:
+            xml = f.read().encode('utf-8')
+    except IOError:
+        assert False, "%s not found" % supplier_file
     conn.request('POST', '/gdxp/supplier', xml, {'Content-type': 'text/xml'})
     r = conn.getresponse()
     assertCode(r, 201)
