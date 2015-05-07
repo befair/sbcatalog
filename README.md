@@ -100,6 +100,20 @@ Tramite API è possibile interagire con il database dei fornitori in questo modo
 
     `$ curl -XGET -H "Content-type: application/json" http://api.sbcatalog.labs.befair.it/supplier/`
 
+## Testing
+
+Per lanciare i test:
+
+1. Spostarsi sulla cartella `tests`
+
+2. Installare i requisiti con:
+
+    pip install -r requirements
+
+3. Lanciare i test con `py.test`:
+
+    py.test
+
 ## Autori
 
 * Luca Ferroni
