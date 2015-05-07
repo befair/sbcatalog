@@ -3,7 +3,18 @@
 *
 */
 
+// settings
+// show prices
+var SHOW_PRICES = false;
+
 var angularIO = angular.module('sbcatalogApp', ['ngMaterial'])
+// filter to format currency
+.filter("customCurrency", function() {
+      return function(value, currencySymbol) {
+          // format float value and add currency symbol
+          return parseFloat(value.replace(',','.')).toFixed(2).toString() + " " + currencySymbol;
+      };
+})
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('green-light');
     /*.primaryPalette('blue', {
@@ -65,6 +76,7 @@ angularIO.controller('AppCtrl', ['$scope', '$mdDialog', '$http', '$rootScope', f
 
     function DialogController(scope, $mdDialog, supplier) {
       scope.s = supplier;
+      scope.showPrices = SHOW_PRICES;
       scope.closeDialog = function() {
         $mdDialog.hide();
       };
