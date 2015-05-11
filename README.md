@@ -17,6 +17,9 @@ SBcatalog propone:
 * una API che consenta ai programmatori di caricare e scaricare i cataloghi dei fornitori con cui sono in relazione;
 * l'integrazione con [il portale nazionale dell'economia solidale](http://www.economiasolidale.net);
 
+Un caso d'uso:
+![Il listino fornitore immesso in un gestionale si sincronizza con tutti](./docs/sync-01.png "Il listino fornitore immesso in un gestionale si sincronizza con tutti")
+
 Visione d'insieme dove AGGREGATOR = SBCatalog:
 ![Visione d'insieme](./docs/SBCatalog_comprehensive_view.png "Visione d'insieme")
 
