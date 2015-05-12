@@ -1,0 +1,72 @@
+/*
+ * Custom
+ *
+ */
+
+body {
+  font-family: "Helvetica";
+  text-align: center;
+  padding: 50px 20px 0;
+  background: #f4f4f7;
+  color: #444;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.2em;
+  border-bottom: #CCC solid 1px;
+  padding: 20px 0;
+}
+
+h3 {
+  font-weight: 300;
+}
+
+.button-div {
+  display: inline-flex;
+}
+
+
+/*
+* Background Colors
+*
+* Background utility classes to add color to elements
+*/
+
+.background-sky {
+  background-color: $ocean;
+  background: linear-gradient($ocean, $regal);
+  color: $snow;
+}
+
+.background-regal {
+  background: $regal;
+  color: $snow;
+}
+
+.background-coal {
+  background: $coal;
+  color: $snow;
+}
+
+.background-steel {
+  background: $steel;
+  color: $snow;
+}
+
+.background-silver {
+  background: $silver;
+  color: $snow;
+}
+
+
+/*
+* Text Colors
+*
+* Text color utility color classes
+*/
+
+.text-snow {
+  color: $snow;
+}
