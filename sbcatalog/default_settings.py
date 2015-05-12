@@ -40,6 +40,21 @@ schema = {
         'minlength': 1,
         'maxlength': 20,
     },
+    'note' : {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 20,
+    },
+    'extraFields': {
+        'type': 'dict',
+        'schema': {
+            'extraField': {
+                'type': 'string',
+                'minlength': 1,
+                'maxlength': 20,
+            }
+        }
+    },
     'address': {
         'type': 'dict',
         'schema': {
