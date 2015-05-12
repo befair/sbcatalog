@@ -83,7 +83,7 @@ Installare Harp con NPM:
 
 ### Client
 
-    $ cd sbcatalog-ui/public
+    $ cd frontend
     $ harp server
     $ firefox http://localhost:9000
 

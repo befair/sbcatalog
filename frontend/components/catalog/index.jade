@@ -1,0 +1,38 @@
+.grid-fluid.l-space-bottom-8
+  .c2 &nbsp;
+
+  .c8.text-center
+    h3.text-headline.text-uppercase  Building For a Sustainable Future
+    p.text-body.
+      Social business catalog is made for our sons and daughters...
+
+  .c2 &nbsp;
+  .clear
+
+.grid-fluid.l-space-bottom-6
+
+  .button-div
+      section(layout="column" layout-align="center center" ng-repeat="page in pages" )
+        md-button.md-raised(ng-click="setPageNumber(page)") {{ page }}
+
+  // filter by category
+  md-select(ng-model="search.name")
+    md-option(value="" selected) Seleziona la categoria
+    md-option(value="{{ s.name }}" ng-repeat="s in suppliers_filtered") {{ s.name }}
+
+  br
+  br
+  br
+  h3.text-headline.text-uppercase.text-center Fornitori attuali
+
+  // suppliers list
+  .c3(ng-repeat="s in suppliers_filtered | filter:search")
+      md-card.bio-card(ng-click="showBio($event, s)")
+        header
+          img(width=250 height=150 ng-src="{{ ::s.logo || 'http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png' }}" alt="{{ ::s.name }}")
+          nav
+            button(aria-label="View Catalog") View Catalog
+
+        md-card-content
+          h3.text-headline.bio-card-name {{ ::s.lastname }}
+          p(class="bio-card-content text-body") {{ ::s.name }}
