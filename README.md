@@ -87,6 +87,15 @@ Installare Harp con NPM:
     $ harp server
     $ firefox http://localhost:9000
 
+### Aggiornamento Geodatabase
+
+Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):
+
+	$ cd sbcatalog
+	$ ./run.py update-geodb
+
+Per la `georeferenziazione` viene utilizzato [Open Street Map](http://www.openstreetmap.org/about/).
+
 ### Utilizzo API
 
 Tramite API è possibile interagire con il database dei fornitori in questo modo:

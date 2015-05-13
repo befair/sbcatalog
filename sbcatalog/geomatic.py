@@ -38,7 +38,7 @@ def get_addresses():
             suppliers_out.append(x)
     return suppliers_out
 
-def insert_in_db():
+def update_geo_db():
     with pymongo.connection.Connection() as conn:
         coll = conn['sbcatalog']['geosupplier']
         coll.drop()
