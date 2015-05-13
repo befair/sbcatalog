@@ -22,6 +22,31 @@ RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 # individual items  (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 
+geosupplier_schema = {
+    'name': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 40,
+    },
+    'address': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 40,
+    },
+    'webSite': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 40,
+    },
+    'coords': {
+        'type': 'list',
+        'items': {
+            'type': 'float',
+            'type': 'float'
+        }
+    }
+}
+
 schema = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/nicolaiarocci/cerberus) for details.
@@ -265,5 +290,10 @@ supplier = {
     'schema': schema
 }
 
+geosupplier = {
+    # most global settings can be overridden at resource level
+    'resource_methods': ['GET'],
+    'schema': geosupplier_schema
+}
 
-DOMAIN = {'supplier': supplier}
+DOMAIN = {'supplier': supplier, 'geosupplier': geosupplier}
