@@ -103,6 +103,10 @@ Tramite API è possibile interagire con il database dei fornitori in questo modo
 
     `$ curl -XGET -H "Content-type: application/json" http://sbcatalog.labs.befair.it/api/supplier/`
 
+4. Scaricare le informazioni geomatiche (coordinate, indirizzo, nome) dei fornitori:
+
+	`$ curl -XGET -H "Content-type: application/json" http://sbcatalog.labs.befair.it/geo/supplier/`
+
 ## Testing
 
 Per lanciare i test:
