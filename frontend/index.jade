@@ -23,15 +23,19 @@ html(lang="it" ng-app="app" itemscope itemtype="http://schema.org/Framework")
     link(rel="stylesheet" href="/libs/angular-material.min.css")
     link(rel="stylesheet" href="/libs/icomoon.css")
     link(rel="stylesheet" href="/styles/main.css")
+    link(rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
 
     script(src="/libs/angular.min.js")
     script(src="/libs/angular-animate.min.js")
     script(src="/libs/angular-aria.min.js")
     script(src="/libs/angular-material.min.js")
     script(src="/app.js")
+    script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
 
   body(class="l-offset-nav"  ng-controller="AppCtrl")
     h1 Welcome to Social Business Catalog
+    include ./components/map/map
+    script(src="/components/map/map.js")
     h3 This is the solidarity-based suppliers' repository. Enjoy.
     br
     br
