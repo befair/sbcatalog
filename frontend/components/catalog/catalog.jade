@@ -1,0 +1,27 @@
+h2.text-headline.text-center(ng-controller='CatalogController as catalog') Fornitori attuali
+
+div(layout)
+  p(flex='20' layout layout-align='center center') Filtra per produttore:
+  md-select(ng-model='search.name' ng-change='onSelectChange()' layout layout-align='left center')
+    md-option(value='' selected) Tutti i produttori
+    md-option(value='{{ ::supplier.name }}' ng-repeat='supplier in suppliers') {{ ::supplier.name }}
+
+// pagination with suppliers list
+md-content.md-padding
+  md-tabs(md-dynamic-height)
+    md-tab(ng-repeat='page in pages' md-on-select='setPageNumber(page)')
+      md-tab-label {{ ::page }}
+      md-tab-body
+        br
+        br
+        .grid-fluid.l-space-bottom-6
+          .c3(ng-repeat='supplier in suppliers | filter:search.name | limitTo:pagination:paginationStart')
+              md-card.bio-card(ng-click='showCatalog($event, supplier)')
+                header
+                  img(width=250 height=150 alt='{{ ::supplier.name }}' ng-src='{{ ::supplier.logo || "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" }}')
+                  nav
+                    button(aria-label='View Catalog') View Catalog
+
+                md-card-content
+                  h3.text-headline.bio-card-name {{ ::supplier.lastname }}
+                  p(class='bio-card-content text-body') {{ ::supplier.name }}
