@@ -14,7 +14,7 @@ app.filter("customCurrency", function() {
       };
 });
 
-app.controller('AppCtrl', function($scope, $mdDialog, $http, $rootScope){
+app.controller('AppCtrl', function($scope, $mdDialog, $http, $rootScope, $filter){
 
   // TOGGLE MAIN NAV (TOP) ON MOBILE
   $scope.toggleDocsMenu = function(event) {
@@ -78,19 +78,23 @@ app.controller('AppCtrl', function($scope, $mdDialog, $http, $rootScope){
       for ( sup in $scope.suppliers) {
           $scope.categories.push(sup.name);
       }
-      $scope.pagination = 30;
-      $scope.total_suppliers = $scope.suppliers.length;
-      $scope.pages_number = Math.ceil($scope.total_suppliers / $scope.pagination);
-      $scope.pages = [];
-      for (var i=1; i <= $scope.pages_number; i++) {
-          $scope.pages.push(i);
-      }
+
+      $scope.pagination = 24;
 
       $scope.setPageNumber = function(page) {
-        $scope.actual_page = page;
-        $scope.suppliers_filtered = $scope.suppliers.slice((page-1)*$scope.pagination, page*$scope.pagination);
+        $scope.paginationStart = (page-1) * $scope.pagination;
       }
 
-      $scope.setPageNumber(1);
+      $scope.onSelectChange =  function() {
+          $scope.total_suppliers = $filter('filter')($scope.suppliers,
+                                                     $scope.search.name).length;
+          $scope.pages_number = Math.ceil($scope.total_suppliers / $scope.pagination);
+          $scope.pages = [];
+          for (var i=1; i <= $scope.pages_number; i++)
+              $scope.pages.push(i);
+          $scope.setPageNumber(1);
+      }
+
+      $scope.onSelectChange();
   });
 });
