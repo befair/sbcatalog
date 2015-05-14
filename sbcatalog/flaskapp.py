@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from eve import Eve
-from endpoints import xml_collections_endpoint
+from endpoints import xml_collections_endpoint, geo_collections_endpoint
 
 
 class XMLEve(Eve):
@@ -38,12 +38,20 @@ class XMLEve(Eve):
 
         resource = 'supplier'
         endpoint = resource + "|resource"
+        geo_resource = 'geosupplier'
+        geo_endpoint = geo_resource + "|resource"
         self.view_functions[endpoint] = xml_collections_endpoint
+        self.view_functions[geo_endpoint] = geo_collections_endpoint
         settings = self.config['DOMAIN'][resource]
+        geo_settings = self.config['DOMAIN'][geo_resource]
         self.add_url_rule(self.api_prefix + '/gdxp/supplier',
                           endpoint,
                           view_func=xml_collections_endpoint,
                           methods=settings['resource_methods'] + ['OPTIONS'])
+        self.add_url_rule(self.api_prefix + '/geo/supplier',
+                          geo_endpoint,
+                          view_func=geo_collections_endpoint,
+                          methods=geo_settings['resource_methods'] + ['OPTIONS'])
 
         # MIGHT BE USEFUL
         # url = '%s/%s' % (self.api_prefix, settings['url'])

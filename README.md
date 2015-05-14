@@ -87,6 +87,15 @@ Installare Harp con NPM:
     $ harp server
     $ firefox http://localhost:9000
 
+### Aggiornamento Geodatabase
+
+Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):
+
+	$ cd sbcatalog
+	$ ./run.py update-geodb
+
+Per la `georeferenziazione` viene utilizzato [Open Street Map](http://www.openstreetmap.org/about/).
+
 ### Utilizzo API
 
 Tramite API è possibile interagire con il database dei fornitori in questo modo:
@@ -102,6 +111,10 @@ Tramite API è possibile interagire con il database dei fornitori in questo modo
 3. Scaricare tutti i fornitori e i cataloghi prodotti in formato JSON:
 
     `$ curl -XGET -H "Content-type: application/json" http://sbcatalog.labs.befair.it/api/supplier/`
+
+4. Scaricare le informazioni geomatiche (coordinate, indirizzo, nome) dei fornitori:
+
+	`$ curl -XGET -H "Content-type: application/json" http://sbcatalog.labs.befair.it/geo/supplier/`
 
 ## Testing
 

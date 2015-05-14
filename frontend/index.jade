@@ -16,6 +16,7 @@ html(lang='it' itemscope itemtype='http://schema.org/Framework')
     link(rel='stylesheet' href='/libs/angular-material.min.css')
     link(rel='stylesheet' href='/libs/icomoon.css')
     link(rel='stylesheet' href='/styles/main.css')
+    link(rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
 
     script(src='/libs/angular.min.js')
     script(src='/libs/angular-animate.min.js')
@@ -23,6 +24,7 @@ html(lang='it' itemscope itemtype='http://schema.org/Framework')
     script(src='/libs/angular-material.min.js')
     script(src='/libs/router.es5.min.js')
     script(src='/app.js')
+    script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
 
   body(ng-app='sbApp' ng-controller='AppController as app')
     md-content
@@ -35,6 +37,9 @@ html(lang='it' itemscope itemtype='http://schema.org/Framework')
     md-content
       h1 {{ ::app.title }}
       h3 {{ ::app.subtitle }}
+      include ./components/map/map
+      script(src="/components/map/map.js")
 
     md-content
       div(ng-viewport='default')
+

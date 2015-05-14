@@ -73,5 +73,10 @@ angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
       }
 
       $rootScope.onSelectChange();
-    });
+  });
+
+  // MAP ENVIRONMENT
+  $http.get('http://localhost:5000/geo/supplier/').success(function(data) {
+    Map.addSuppliers(data);
+  });
 });
