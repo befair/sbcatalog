@@ -59,3 +59,9 @@ def xml_collections_endpoint(**lookup):
 
     else:
         return collections_endpoint(**lookup)
+
+@crossdomain(origin='*')
+def geo_collections_endpoint(**lookup):
+    resource = _resource()
+    response = collections_endpoint(**lookup)
+    return send_response(resource, response)
