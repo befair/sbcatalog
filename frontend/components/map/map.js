@@ -11,6 +11,8 @@ Map.addSuppliers = function(data) {
 	for ( var x in suppliers ) {
 		s = suppliers[x];
 		L.marker(s.coords.reverse()).addTo(map)
-             .bindPopup(s.name + "<br>" + s.address + "<br>" + (s.webSite? s.webSite: ''));
+             .bindPopup("<b>" + s.name + "</b><br>" +
+                        s.address + "<br>" +
+                        (s.webSite? '<a href="' + s.webSite + '">' + s.webSite + '</a>': ''));
     }
 }
