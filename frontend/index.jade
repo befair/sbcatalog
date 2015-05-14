@@ -1,38 +1,40 @@
 doctype
-html(lang="it" ng-app="app" itemscope itemtype="http://schema.org/Framework")
+html(lang='it' itemscope itemtype='http://schema.org/Framework')
   head
     title SBCatalog
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    meta(name="description" content="#{description}")
-    meta(name="keywords" content="#{keywords}")
-    meta(name="robots" content="all")
-    meta(name="referrer" content="origin")
-    meta(name="viewport" id="viewport" content="width=device-width, initial-scale=1")
+    base(href='/')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='robots' content='all')
+    meta(name='referrer' content='origin')
+    meta(name='viewport' id='viewport' content='width=device-width, initial-scale=1')
 
-    meta(property="og:title" content="SB Catalog")
-    meta(property="og:description" content="#{description}")
-
-    meta(itemprop="name" content="SB Catalog")
-    meta(itemprop="description" content="#{description}")
-
-    link(rel="icon" type="image/x-icon" href="http://www.befair.it/favicon.ico")
-    link(rel="icon" type="image/png" href="http://www.befair.it/favicon.ico" sizes="16x16")
-    link(rel="icon" type="image/png" href="http://www.befair.it/favicon.ico" sizes="32x32")
+    link(rel='icon' type='image/x-icon' href='http://www.befair.it/favicon.ico')
+    link(rel='icon' type='image/png' href='http://www.befair.it/favicon.ico' sizes='16x16')
+    link(rel='icon' type='image/png' href='http://www.befair.it/favicon.ico' sizes='32x32')
     link(href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700' rel='stylesheet' type='text/css')
-    link(rel="stylesheet" href="/libs/angular-material.min.css")
-    link(rel="stylesheet" href="/libs/icomoon.css")
-    link(rel="stylesheet" href="/styles/main.css")
+    link(rel='stylesheet' href='/libs/angular-material.min.css')
+    link(rel='stylesheet' href='/libs/icomoon.css')
+    link(rel='stylesheet' href='/styles/main.css')
 
-    script(src="/libs/angular.min.js")
-    script(src="/libs/angular-animate.min.js")
-    script(src="/libs/angular-aria.min.js")
-    script(src="/libs/angular-material.min.js")
-    script(src="/app.js")
+    script(src='/libs/angular.min.js')
+    script(src='/libs/angular-animate.min.js')
+    script(src='/libs/angular-aria.min.js')
+    script(src='/libs/angular-material.min.js')
+    script(src='/libs/router.es5.min.js')
+    script(src='/app.js')
 
-  body(class="l-offset-nav"  ng-controller="AppCtrl")
-    h1 Welcome to Social Business Catalog
-    h3 This is the solidarity-based suppliers' repository. Enjoy.
-    br
-    br
-    include ./components/catalog/index
+  body(ng-app='sbApp' ng-controller='AppController as app')
+    md-content
+      md-toolbar
+        .md-toolbar-tools
+          span(flex)
+          md-button(ng-link='catalog') Catalog
+          md-button(ng-link='about') About
+
+    md-content
+      h1 {{ ::app.title }}
+      h3 {{ ::app.subtitle }}
+
+    md-content
+      div(ng-viewport='default')

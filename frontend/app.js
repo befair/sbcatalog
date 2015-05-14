@@ -1,100 +1,77 @@
-var SHOW_PRICES = false;
-
-var app = angular.module('app', ['ngMaterial']);
-
-app.config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('light-green');
-});
-
-// filter to format currency
-app.filter("customCurrency", function() {
-      return function(value, currencySymbol) {
-          // format float value and add currency symbol
-          return parseFloat(value.replace(',','.')).toFixed(2).toString() + " " + currencySymbol;
-      };
-});
-
-app.controller('AppCtrl', function($scope, $mdDialog, $http, $rootScope, $filter){
-
-  // TOGGLE MAIN NAV (TOP) ON MOBILE
-  $scope.toggleDocsMenu = function(event) {
-    $scope.showDocsNav = !$scope.showDocsNav;
+angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme("light-green");
+})
+.filter("customCurrency", function() {
+  return function(value, currencySymbol) {
+    // format float value and add currency symbol
+    return parseFloat(value.replace(",",".")).toFixed(2).toString() + " " + currencySymbol;
   };
+})
+.controller("AppController", function($router) {
+  $router.config([
+    { path: "/",        redirectTo: "/catalog" },
+    { path: "/catalog", component: "catalog" },
+    { path: "/about",   component: "about" }
+  ]);
 
-  // TOGGLE DOCS NAV
-  $scope.toggleMainMenu = function(event) {
-    $scope.showMainNav = !$scope.showMainNav;
-  };
+  this.title = "Welcome to Social Business Catalog";
+  this.subtitle = "This is the solidarity-based suppliers' repository. Enjoy!";
+})
+.controller("AboutController", function() {})
+.controller("CatalogController", function($mdDialog, $http, $filter, $rootScope) {
 
-  // TOGGLE DOCS VERSION & LANGUAGE
-  $scope.toggleVersionMenu = function(event) {
-    $scope.showMenu = !$scope.showMenu;
-  };
+  this.showPrices = false;
+  $rootScope.pagination = 24;
+  $rootScope.search = {};
+  $rootScope.suppliers = [];
+  $rootScope.categories = [];
 
-  // BIO MODAL
-  $scope.showBio = function($event, s) {
-    var parentEl = angular.element(document.body);
-    var person = angular.element($event.currentTarget);
-    var name = person.attr('data-name');
-    var bio = person.attr('data-bio');
-    var pic = person.attr('data-pic');
-    var twitter = person.attr('data-twitter');
-    var website =  person.attr('data-website');
-    var $twitter = twitter !== 'undefined' ? '<a class="button button-subtle button-small" href="https://twitter.com/' +  person.attr('data-twitter') + '" md-button>Twitter</a>' : '';
-    var $website = website !== 'undefined' ? '<a class="button button-subtle button-small" href="' + person.attr('data-website') + '" md-button>Website</a>' : '';
-
+  // Catalog Modal
+  $rootScope.showCatalog = function($event, supplier) {
     $mdDialog.show({
-      parent: parentEl,
+      parent: angular.element(document.body),
       targetEvent: $event,
       clickOutsideToClose: true,
       templateUrl: "components/catalog/supplier.html",
       locals: {
-        supplier: s
+        supplier: supplier
       },
-      controller: DialogController
+      // controller: function(scope, $mdDialog, supplier) {
+      controller: function(scope, $mdDialog, supplier) {
+        scope.supplier = supplier;
+        scope.showPrices = this.showPrices;
+        scope.closeDialog = function() {
+          $mdDialog.hide();
+        };
+      }
     });
-
-    function DialogController(scope, $mdDialog, supplier) {
-      scope.s = supplier;
-      scope.showPrices = SHOW_PRICES;
-      scope.closeDialog = function() {
-        $mdDialog.hide();
-      };
-    }
   };
 
-  // INITIALIZE ENV
-  $scope.search = {};
-  $scope.suppliers = [];
+  $rootScope.setPageNumber = function(page) {
+    $rootScope.paginationStart = (page-1) * $rootScope.pagination;
+  }
 
-  //$http.get('http://sbcatalog.labs.befair.it/api/supplier/')
-  $http.get('http://localhost:5000/supplier/')
-  .success(function(data) {
-      $scope.suppliers = data._items;
-      //copy categories in a var to avoid two-way binding
-      //for categories selection
-      $scope.categories = [];
-      var sup;
-      for ( sup in $scope.suppliers) {
-          $scope.categories.push(sup.name);
+  $rootScope.onSelectChange = function() {
+    $rootScope.totalSuppliers = $filter("filter")($rootScope.suppliers,
+                                                  $rootScope.search.name).length;
+    $rootScope.pagesNumber = Math.ceil($rootScope.totalSuppliers / $rootScope.pagination);
+    $rootScope.pages = [];
+    for (var i=1; i <= $rootScope.pagesNumber; i++) {
+      $rootScope.pages.push(i);
+    }
+    $rootScope.setPageNumber(1);
+  }
+
+  //$http.get("http://sbcatalog.labs.befair.it/api/supplier/")
+  $http.get("http://localhost:5000/supplier/")
+    .success(function(data) {
+      $rootScope.suppliers = data._items;
+      //copy categories in a var to avoid two-way binding for categories selection
+      for (var supplier in $rootScope.suppliers) {
+          $rootScope.categories.push(supplier.name);
       }
 
-      $scope.pagination = 24;
-
-      $scope.setPageNumber = function(page) {
-        $scope.paginationStart = (page-1) * $scope.pagination;
-      }
-
-      $scope.onSelectChange =  function() {
-          $scope.total_suppliers = $filter('filter')($scope.suppliers,
-                                                     $scope.search.name).length;
-          $scope.pages_number = Math.ceil($scope.total_suppliers / $scope.pagination);
-          $scope.pages = [];
-          for (var i=1; i <= $scope.pages_number; i++)
-              $scope.pages.push(i);
-          $scope.setPageNumber(1);
-      }
-
-      $scope.onSelectChange();
-  });
+      $rootScope.onSelectChange();
+    });
 });
