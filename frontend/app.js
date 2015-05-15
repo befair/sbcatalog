@@ -67,8 +67,11 @@ angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
   $http.get("http://localhost:5000/supplier/")
     .success(function(data) {
       $rootScope.suppliers = data._items;
-      //copy categories in a var to avoid two-way binding for categories selection
-      for (var supplier in $rootScope.suppliers) {
+      for (var s in $rootScope.suppliers) {
+          supplier = $rootScope.suppliers[s];
+          supplier.addressString = (supplier.address.street? (supplier.address.street + " - ") : '') +
+                                   (supplier.address.locality? supplier.address.locality: '');
+          //copy categories in a var to avoid two-way binding for categories selection
           $rootScope.categories.push(supplier.name);
       }
 
