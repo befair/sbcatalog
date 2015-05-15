@@ -23,23 +23,22 @@ html(lang='it' itemscope itemtype='http://schema.org/Framework')
     script(src='/libs/angular-aria.min.js')
     script(src='/libs/angular-material.min.js')
     script(src='/libs/router.es5.min.js')
-    script(src='/app.js')
     script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
+    script(src='/app.js')
+    script(src='/components/map/map.js')
 
   body(ng-app='sbApp' ng-controller='AppController as app')
     md-content
       md-toolbar
         .md-toolbar-tools
           span(flex)
+          md-button(ng-link='map') Map
           md-button(ng-link='catalog') Catalog
           md-button(ng-link='about') About
 
     md-content
       h1 {{ ::app.title }}
       h3 {{ ::app.subtitle }}
-      include ./components/map/map
-      script(src="/components/map/map.js")
 
     md-content
       div(ng-viewport='default')
-

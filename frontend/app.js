@@ -1,4 +1,4 @@
-angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
+var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme("light-green");
 })
@@ -10,7 +10,8 @@ angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 })
 .controller("AppController", function($router) {
   $router.config([
-    { path: "/",        redirectTo: "/catalog" },
+    { path: "/",        redirectTo: "/map" },
+    { path: "/map", component: "map" },
     { path: "/catalog", component: "catalog" },
     { path: "/about",   component: "about" }
   ]);
@@ -73,10 +74,5 @@ angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
       }
 
       $rootScope.onSelectChange();
-  });
-
-  // MAP ENVIRONMENT
-  $http.get('http://localhost:5000/geo/supplier/').success(function(data) {
-    Map.addSuppliers(data);
   });
 });
