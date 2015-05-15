@@ -11,9 +11,9 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 .controller("AppController", function($router) {
   $router.config([
     { path: "/",        redirectTo: "/map" },
-    { path: "/map", component: "map" },
-    { path: "/catalog", component: "catalog" },
-    { path: "/about",   component: "about" }
+    { path: "/map",     component: "map",     as: "map" },
+    { path: "/catalog", component: "catalog", as: "catalog" },
+    { path: "/about",   component: "about",   as: "about" }
   ]);
 
   this.title = "Welcome to Social Business Catalog";
