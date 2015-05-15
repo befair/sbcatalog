@@ -18,5 +18,4 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 
   this.title = "Welcome to Social Business Catalog";
   this.subtitle = "This is the solidarity-based suppliers' repository. Enjoy!";
-})
-.controller("AboutController", function() {});
+});
