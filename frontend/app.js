@@ -1,4 +1,4 @@
-angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
+var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme("light-green");
 })
@@ -10,73 +10,12 @@ angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 })
 .controller("AppController", function($router) {
   $router.config([
-    { path: "/",        redirectTo: "/catalog" },
-    { path: "/catalog", component: "catalog" },
-    { path: "/about",   component: "about" }
+    { path: "/",        redirectTo: "/map" },
+    { path: "/map",     component: "map",     as: "map" },
+    { path: "/catalog", component: "catalog", as: "catalog" },
+    { path: "/about",   component: "about",   as: "about" }
   ]);
 
   this.title = "Welcome to Social Business Catalog";
   this.subtitle = "This is the solidarity-based suppliers' repository. Enjoy!";
-})
-.controller("AboutController", function() {})
-.controller("CatalogController", function($mdDialog, $http, $filter, $rootScope) {
-
-  this.showPrices = false;
-  $rootScope.pagination = 24;
-  $rootScope.search = {};
-  $rootScope.suppliers = [];
-  $rootScope.categories = [];
-
-  // Catalog Modal
-  $rootScope.showCatalog = function($event, supplier) {
-    $mdDialog.show({
-      parent: angular.element(document.body),
-      targetEvent: $event,
-      clickOutsideToClose: true,
-      templateUrl: "components/catalog/supplier.html",
-      locals: {
-        supplier: supplier
-      },
-      // controller: function(scope, $mdDialog, supplier) {
-      controller: function(scope, $mdDialog, supplier) {
-        scope.supplier = supplier;
-        scope.showPrices = this.showPrices;
-        scope.closeDialog = function() {
-          $mdDialog.hide();
-        };
-      }
-    });
-  };
-
-  $rootScope.setPageNumber = function(page) {
-    $rootScope.paginationStart = (page-1) * $rootScope.pagination;
-  }
-
-  $rootScope.onSelectChange = function() {
-    $rootScope.totalSuppliers = $filter("filter")($rootScope.suppliers,
-                                                  $rootScope.search.name).length;
-    $rootScope.pagesNumber = Math.ceil($rootScope.totalSuppliers / $rootScope.pagination);
-    $rootScope.pages = [];
-    for (var i=1; i <= $rootScope.pagesNumber; i++) {
-      $rootScope.pages.push(i);
-    }
-    $rootScope.setPageNumber(1);
-  }
-
-  //$http.get("http://sbcatalog.labs.befair.it/api/supplier/")
-  $http.get("http://localhost:5000/supplier/")
-    .success(function(data) {
-      $rootScope.suppliers = data._items;
-      //copy categories in a var to avoid two-way binding for categories selection
-      for (var supplier in $rootScope.suppliers) {
-          $rootScope.categories.push(supplier.name);
-      }
-
-      $rootScope.onSelectChange();
-  });
-
-  // MAP ENVIRONMENT
-  $http.get('http://localhost:5000/geo/supplier/').success(function(data) {
-    Map.addSuppliers(data);
-  });
 });

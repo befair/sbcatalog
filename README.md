@@ -76,7 +76,7 @@ Installare Harp con NPM:
 
 ### Server
 
-    $ pip install -r requirements.txt
+    $ pip install -r requirements/dev.txt
     $ cd sbcatalog
     $ cp settings_dist.py settings.py
     $ ./run.py
@@ -122,11 +122,7 @@ Per lanciare i test:
 
 1. Spostarsi sulla cartella `tests`
 
-2. Installare i requisiti con:
-
-    pip install -r requirements
-
-3. Lanciare i test con `py.test`:
+2. Lanciare i test con `py.test`:
 
     py.test
 
