@@ -2,6 +2,8 @@ md-dialog.modal(aria-label='List dialog')
   md-content
     img.left(width=500 height=150 alt='{{ ::supplier.name }}' ng-src='{{ ::supplier.logo || "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" }}')
     h3.text-headline {{ ::supplier.name }}
+    p {{::supplier.addressString}}
+    a(href="{{ ::supplier.contacts.contact.primary.webSite }}") {{ ::supplier.contacts.contact.primary.webSite }}
     //.modal-social qualcosa di social
     //p.text-body bio
 
@@ -10,7 +12,7 @@ md-dialog.modal(aria-label='List dialog')
       md-list-item.md-2-line(ng-repeat='product in supplier.products.product')
         //img.md-avatar(ng-src='{{ ::product.img }}')
         .md-list-item-text
-          h3 {{ ::product.name }}
+          p {{ ::product.name }}
           p(ng-show='{{ ::showPrices }}') {{ ::product.orderInfo.umPrice | customCurrency:'€' }}
         //md-icon.md-secondary prezzo
 
