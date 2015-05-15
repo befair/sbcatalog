@@ -6,11 +6,10 @@ app.controller("MapController", function($http) {
 
     // return index of a marker in markers that match coordinates
     var getMarkerFromCoords = function(coords, markers) {
-        for (x in markers) {
-            if (markers[x][0] == coords[0] &&
-                markers[x][1] == coords[1])
-                return x;
-        }
+        return _.findIndex(markers, function(x) {
+            return _.isEqual(x, coords);
+        });
+
     }
 
     // add open street map layer to map
@@ -24,17 +23,15 @@ app.controller("MapController", function($http) {
         suppliers = data._items;
         markers = [];
 
-        for ( var x in suppliers ) {
-            s = suppliers[x];
+        _.forEach(suppliers, function(s) {
             c = s.coords.reverse();
 
             // this will move the point of a 
             // random offset if there is duplicate
-            while(getMarkerFromCoords(c, markers) !== undefined) {
-                c[0] += Math.random()/1000.0;
-                c[0] -= Math.random()/1000.0;
-                c[1] -= Math.random()/1000.0;
-                c[1] += Math.random()/1000.0;
+            while(getMarkerFromCoords(c, markers) >= 0) {
+                r = Math.random;
+                c[0] += (r() - r()) / 1000.0;
+                c[1] += (r() - r()) / 1000.0;
             }
 
             // push into the markers array
@@ -45,6 +42,6 @@ app.controller("MapController", function($http) {
                 .bindPopup("<b>" + s.name + "</b><br>" + s.address + "<br>" +
                            (s.webSite? '<a href="' + s.webSite + '">' +
                             s.webSite + '</a>': ''));
-        }
+        });
     });
 });
