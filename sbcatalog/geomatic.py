@@ -1,6 +1,6 @@
 import geocoder, pymongo, json
 
-def get_addresses():
+def get_addresses(verbose=False):
     with pymongo.connection.Connection() as conn:
         coll = conn['sbcatalog']['supplier']
         suppliers_in = coll.find()
@@ -17,19 +17,22 @@ def get_addresses():
             if a[k]:
                 address += a[k] + ' '
         address = address[:-1]
-        print('"' + address + '"', end=' ')
+        if verbose:
+            print('"' + address + '"', end=' ')
         # trying with full address
         result = geocoder.osm(address).json
         if result['status'] == 'OK' and result['country'] == 'Italia':
             success = True
         # trying with only city
         elif a['locality']:
-            print('NOT FOUND!  ' + '"' + a['locality'] + '"', end=' ')
+            if verbose:
+                print('NOT FOUND!  ' + '"' + a['locality'] + '"', end=' ')
             result = geocoder.osm(a['locality']).json
             success = result['status'] == 'OK' and result['country'] == 'Italia' 
 
         if success:
-            print('OK!')
+            if verbose:
+                print('OK!')
             x['coords'] = result['geometry']['coordinates']
             x['address'] = address
             webSite = s['contacts']['contact']['primary']['webSite']
@@ -38,11 +41,11 @@ def get_addresses():
             suppliers_out.append(x)
     return suppliers_out
 
-def update_geo_db():
+def update_geo_db(verbose=False):
     with pymongo.connection.Connection() as conn:
         coll = conn['sbcatalog']['geosupplier']
         coll.drop()
-        coll.insert(get_addresses())
+        coll.insert(get_addresses(verbose))
 
 def get_addresses_json():
     return json.dumps(get_addresses())
