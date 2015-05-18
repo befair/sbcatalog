@@ -87,6 +87,11 @@ Installare Harp con NPM:
     $ harp server
     $ firefox http://localhost:9000
 
+Per settare il frontend per utilizzare un backend particolare:
+
+    $ cd frontend
+    $ echo '{ "apiBaseUrl" : "http://example.org" }' > settings.json
+
 ### Aggiornamento Geodatabase
 
 Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):

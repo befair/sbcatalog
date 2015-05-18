@@ -53,7 +53,7 @@ app.controller("CatalogController",
         $rootScope.setPageNumber(1);
     }
 
-    $http.get("http://localhost:5000/supplier/").success(function(data) {
+    $http.get($rootScope.settings.apiBaseUrl + "/supplier/").success(function(data) {
         // get data payload
         $rootScope.suppliers = data._items;
 

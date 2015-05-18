@@ -1,5 +1,5 @@
 // map controller for sbcatalog frontend
-app.controller("MapController", function($http) {
+app.controller("MapController", function($http, $rootScope) {
 
     // create the map (map container must be loaded in dom)
     var map = L.map('map').setView([41.89, 12.53], 6);
@@ -19,7 +19,7 @@ app.controller("MapController", function($http) {
     }).addTo(map);
 
     // get the supplier data and add to the map
-    $http.get('http://localhost:5000/geo/supplier/').success(function(data) {
+    $http.get($rootScope.settings.apiBaseUrl + '/geo/supplier/').success(function(data) {
         suppliers = data._items;
         markers = [];
 

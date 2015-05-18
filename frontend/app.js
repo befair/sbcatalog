@@ -10,7 +10,29 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
                               + " " + currencySymbol;
         };
     })
-    .controller("AppController", function($router) {
+    .controller("AppController", function($http, $router, $rootScope) {
+
+        var defaultSettings = {
+            "apiBaseUrl" : "http://localhost:5000"
+        };
+
+        var checkDefaultSettings = function() {
+            for (var x in defaultSettings)
+                if (!$rootScope.settings.hasOwnProperty(x))
+                    $rootScope.settings[x] = defaultSettings[x];
+        };
+
+        $http.get("/settings.json")
+            .success(function(data) {
+                $rootScope.settings = data;
+                checkDefaultSettings();
+            })
+            .error(function() {
+                $rootScope.settings = {} ;
+                checkDefaultSettings();
+            });
+
+
         $router.config([
             { path: "/",        redirectTo: "/map" },
             { path: "/map",     component: "map",     as: "map" },
