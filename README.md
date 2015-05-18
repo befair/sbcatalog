@@ -87,6 +87,11 @@ Installare Harp con NPM:
     $ harp server
     $ firefox http://localhost:9000
 
+Per settare il frontend per utilizzare un backend particolare:
+
+    $ cd frontend
+    $ echo '{ "apiBaseUrl" : "http://example.org" }' > settings.json
+
 ### Aggiornamento Geodatabase
 
 Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):
@@ -120,11 +125,9 @@ Tramite API è possibile interagire con il database dei fornitori in questo modo
 
 Per lanciare i test:
 
-1. Spostarsi sulla cartella `tests`
+1. Spostarsi sulla cartella `tests`;
 
-2. Lanciare i test con `py.test`:
-
-    py.test
+2. Lanciare i test con `py.test`.
 
 ## Autori
 
