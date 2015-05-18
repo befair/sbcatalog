@@ -87,6 +87,14 @@ Installare Harp con NPM:
     $ harp server
     $ firefox http://localhost:9000
 
+Se il server risiede in un dominio remoto settare la `apiBaseUrl` correttamente:
+
+    $ echo '{ "apiBaseUrl" : "http://example.org" }' > frontend/settings.json
+
+Per esempio:
+
+    $ echo '{ "apiBaseUrl" : "http://sbcatalog.labs.befair.it/api" }' > frontend/settings.json
+
 ### Aggiornamento Geodatabase
 
 Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):
