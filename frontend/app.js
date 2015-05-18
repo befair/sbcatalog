@@ -12,26 +12,16 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
     })
     .controller("AppController", function($http, $router, $rootScope) {
 
-        var defaultSettings = {
+        $rootScope.settings = {
             "apiBaseUrl" : "http://localhost:5000"
-        };
-
-        var checkDefaultSettings = function() {
-            for (var x in defaultSettings)
-                if (!$rootScope.settings.hasOwnProperty(x))
-                    $rootScope.settings[x] = defaultSettings[x];
         };
 
         $http.get("/settings.json")
             .success(function(data) {
-                $rootScope.settings = data;
-                checkDefaultSettings();
+                for (k in data) {
+                    $rootScope.settings[k] = data[k];
+                }
             })
-            .error(function() {
-                $rootScope.settings = {} ;
-                checkDefaultSettings();
-            });
-
 
         $router.config([
             { path: "/",        redirectTo: "/map" },
