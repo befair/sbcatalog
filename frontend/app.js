@@ -18,10 +18,9 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
 
         $http.get("/settings.json")
             .success(function(data) {
-                for (k in data) {
+                for (k in data)
                     $rootScope.settings[k] = data[k];
-                }
-            })
+            });
 
         $router.config([
             { path: "/",        redirectTo: "/map" },
