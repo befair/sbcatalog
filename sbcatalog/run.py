@@ -10,6 +10,6 @@ app.debug = True
 if __name__ == '__main__':
     if 'update-geodb' in argv:
         from geomatic import update_geo_db
-        update_geo_db()
+        update_geo_db(verbose=True)
     else:
         app.run()
