@@ -1,10 +1,10 @@
 h2.text-headline.text-center Fornitori attuali
 
 div(layout)
-  p(flex='20' layout layout-align='center center') Filtra per produttore:
+  p(flex='20' layout layout-align='center center') Filtra per categoria:
   md-select(ng-model='search.name' ng-change='onSelectChange()' layout layout-align='left center')
-    md-option(value='' selected) Tutti i produttori
-    md-option(value='{{ ::supplier.name }}' ng-repeat='supplier in suppliers') {{ ::supplier.name }}
+    md-option(value='all' selected) Tutte le categorie
+    md-option(value='{{ ::category }}' ng-repeat='category in settings.productCategories') {{ ::category }}
 
 // pagination with suppliers list
 md-content.md-padding
@@ -15,7 +15,7 @@ md-content.md-padding
         br
         br
         .grid-fluid.l-space-bottom-6
-          .c3(ng-repeat='supplier in suppliers | filter:search.name | limitTo:pagination:paginationStart')
+          .c3(ng-repeat='supplier in suppliers | categories:search.name | limitTo:pagination:paginationStart')
               md-card.bio-card(ng-click='showCatalog($event, supplier)')
                 header
                   img(width=250 height=150 alt='{{ ::supplier.name }}' ng-src='{{ ::supplier.logo || "http://www.befair.it/wp-content/uploads/2014/05/logoBEFAIR.png" }}')

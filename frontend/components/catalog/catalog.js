@@ -38,8 +38,8 @@ app.controller("CatalogController",
     // triggered when filter change
     $rootScope.onSelectChange = function() {
         // filter the list of suppliers
-        $rootScope.totalSuppliers = $filter("filter")($rootScope.suppliers,
-                                                      $rootScope.search.name).length;
+        $rootScope.totalSuppliers = $filter("categories")($rootScope.suppliers,
+                                                          $rootScope.search.name).length;
         // get number of pages from supplier count
         $rootScope.pagesNumber = Math.ceil($rootScope.totalSuppliers / 
                                            $rootScope.pagination);
