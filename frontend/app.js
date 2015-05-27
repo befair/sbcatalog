@@ -5,9 +5,23 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
     })
     .filter("customCurrency", function() {
         return function(value, currencySymbol) {
-            // format float value and add currency symbol
-            return parseFloat(value.replace(",",".")).toFixed(2).toString() 
-                              + " " + currencySymbol;
+            if (value)
+                // format float value and add currency symbol
+                return parseFloat(value.replace(",",".")).toFixed(2).toString() 
+                                  + " " + currencySymbol;
+        };
+    })
+    .filter("categories", function() {
+        return function(data, category) {
+            // filter suppliers by products category
+            return _.filter(data, function(x) {
+                if (x.products)
+                    return (_.find(x.products.product, function(y) {
+                         return _.startsWith(y, category);
+                    }) !== undefined);
+                else
+                    return false;
+            });
         };
     })
     .controller("AppController", function($http, $router, $rootScope) {
