@@ -1,35 +1,8 @@
 // sbcatalog frontend
 var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
-    .config(function($mdThemingProvider) {
-        $mdThemingProvider.theme("light-green");
-    })
-    .filter("customCurrency", function() {
-        return function(value, currencySymbol) {
-            if (value)
-                // format float value and add currency symbol
-                return parseFloat(value.replace(",",".")).toFixed(2).toString()
-                                  + " " + currencySymbol;
-        };
-    })
-    .filter("categories", function() {
-        return function(data, category) {
-            if (category === "all")
-                return data;
-
-            else
-                // return the category-filtered list
-                return _.filter(data, function(x) {
-                    // short-circuitation is used to avoid accessing null attributes
-                    return x.products && _.find(x.products.product, function(y) {
-                        // contains relation is used to manage category levels
-                        return y && y.category && _.contains(y.category, category);
-                    });
-                });
-        };
-    })
-    .controller("AppController", function($http, $router, $rootScope) {
-
-        $rootScope.settings = {
+    .factory("setupService", function($http) {
+        // default settings
+        var settings = {
             "apiBaseUrl" : "http://localhost:5000",
             "productCategories": [
                 "Abbigliamento",
@@ -114,12 +87,33 @@ var app = angular.module("sbApp", ["ngMaterial", "ngNewRouter"])
                 "Piante::Piante aromatiche"
             ]
         };
+        return {
+            getSettings: function() {
+                // return a promises that will
+                // be used in the appController
+                return $http.get('/settings.json')
+                    .then(function(result) {
+                        // replace default with custom settings
+                        _.forEach(result.data, function(v,k) {
+                            settings[k] = v;
+                        });
+                        // settings that will be passed to the callback
+                        return settings;
+                    }, function() {
+                        // settings that will be passed to the callback
+                        return settings;
+                    });
+            }
+        };
+    })
+    .config(function($mdThemingProvider) {
+        $mdThemingProvider.theme("light-green");
+    })
+    .controller("AppController", function($router, $rootScope, setupService) {
 
-        $http.get("/settings.json")
-            .success(function(data) {
-                for (k in data)
-                    $rootScope.settings[k] = data[k];
-            });
+        setupService.getSettings().then(function(settings) {
+            $rootScope.settings = settings;
+        });
 
         $router.config([
             { path: "/",        redirectTo: "/map" },
