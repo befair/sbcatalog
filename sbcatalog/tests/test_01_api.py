@@ -2,12 +2,12 @@ from http import client
 import sbcatalog.geomatic
 import xmltodict, json, codecs
 
-# Settings 
+# Settings
 
 conn = client.HTTPConnection('localhost', 5000)
 supplier_file = 'test_data.gdxp'
 
-# Utilities 
+# Utilities
 
 def assertCode(response, expected_code=200):
     """ Assert that response code is the expected """
@@ -36,12 +36,12 @@ def get_item(data):
 
 def check_supplier(supplier):
     """ Check the supplier according to test data """
-    assert supplier['name'] == "Alessandro Vecchietti"
-    assert supplier['address']['street'] == "Localita cima 52"
-    assert supplier['address']['locality'] == "Esanatoglia"
+    assert supplier['name'] == "Acquaterra"
+    assert supplier['address']['street'] == "Loc. campochiesa, 6"
+    assert supplier['address']['locality'] == "Matelica"
     assert supplier['address']['zipcode'] == "62024"
 
-# Tests 
+# Tests
 
 def test_01_post_gdxp():
     """ POST test for importing gdxp suppliers data """
@@ -73,7 +73,7 @@ def test_03_get_gdxp():
     # check supplier data
     item = xmltodict.parse(data)['gdxp']['supplier'][0]
     check_supplier(item)
-    
+
 
 def test_04_geo_api():
     """ Data generation and GET test for geo API """
@@ -86,7 +86,7 @@ def test_04_geo_api():
     item = get_item(data)
 
     # check data
-    assert item['address'] == "Esanatoglia 62024 Localita cima 52"
-    assert item['webSite'] == "http://www.cantinaprimadiesanatoglia.it/"
-    assert item['name'] == "Alessandro Vecchietti"
-    assert item['coords'] == [12.9802818, 43.2828598]
+    assert item['address'] == "Matelica 62024 Loc. campochiesa, 6"
+    #assert item['webSite'] == "http://www.cantinaprimadiesanatoglia.it/"
+    assert item['name'] == "Acquaterra"
+    assert item['coords'] == [13.00948, 43.2565867]
