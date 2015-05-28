@@ -1,4 +1,7 @@
-import geocoder, pymongo, json
+import geocoder
+import pymongo
+import json
+
 
 def get_addresses(verbose=False):
     with pymongo.connection.Connection() as conn:
@@ -28,7 +31,7 @@ def get_addresses(verbose=False):
             if verbose:
                 print('NOT FOUND!  ' + '"' + a['locality'] + '"', end=' ')
             result = geocoder.osm(a['locality']).json
-            success = result['status'] == 'OK' and result['country'] == 'Italia' 
+            success = result['status'] == 'OK' and result['country'] == 'Italia'
 
         if success:
             if verbose:
@@ -41,11 +44,13 @@ def get_addresses(verbose=False):
             suppliers_out.append(x)
     return suppliers_out
 
+
 def update_geo_db(verbose=False):
     with pymongo.connection.Connection() as conn:
         coll = conn['sbcatalog']['geosupplier']
         coll.drop()
         coll.insert(get_addresses(verbose))
+
 
 def get_addresses_json():
     return json.dumps(get_addresses())

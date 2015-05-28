@@ -1,2 +1,3 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
+
 from default_settings import *

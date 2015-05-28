@@ -1,4 +1,4 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 # This file is part of sbcatalog
 #
 # sbcatalog is Copyright © 2015 beFair.it
@@ -43,7 +43,9 @@ def xml_collections_endpoint(**lookup):
     if request.content_type.endswith("/xml"):
         if method == "POST":
             # response = post(resource, payl=xml2json(request.data))
-            response = post_internal(resource, payl=xml2json(request.data), skip_validation=True)
+            response = post_internal(resource,
+                                     payl=xml2json(request.data),
+                                     skip_validation=True)
         elif method == "GET":
             response = collections_endpoint(**lookup)
             l = json.loads(response.data.decode('utf-8'))['_items']
@@ -59,6 +61,7 @@ def xml_collections_endpoint(**lookup):
 
     else:
         return collections_endpoint(**lookup)
+
 
 @crossdomain(origin='*')
 def geo_collections_endpoint(**lookup):

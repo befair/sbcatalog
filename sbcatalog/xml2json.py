@@ -1,4 +1,4 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 # This file is part of sbcatalog
 #
 # sbcatalog is Copyright © 2015 beFair.it
@@ -28,7 +28,6 @@ import xmltodict
 # xmltodict = XML2Dict()
 
 import sys
-import types
 from collections import OrderedDict
 
 

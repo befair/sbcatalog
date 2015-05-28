@@ -1,4 +1,4 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 
 # Let's just use the local mongod instance. Edit as needed.
 
@@ -65,7 +65,7 @@ schema = {
         'minlength': 1,
         'maxlength': 20,
     },
-    'note' : {
+    'note': {
         'type': 'string',
         'minlength': 1,
         'maxlength': 20,

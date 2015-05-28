@@ -1,5 +1,6 @@
 import pymongo
 
+
 def test_restore_db():
     try:
         with pymongo.connection.Connection('localhost', 27017) as conn:

@@ -1,5 +1,6 @@
 import pymongo
 
+
 def test_prepare_db():
     try:
         conn = pymongo.connection.Connection('localhost', 27017)
