@@ -60,13 +60,9 @@ Grazie a tutti quelli che ci provano
 
 È richiesto Python 3.4+, quindi Debian 8+, Ubuntu 14.04+ o Arch.
 
-Su Debian/Ubuntu, installare Python 3, MongoDB ed NPM:
+Su Debian/Ubuntu, installare Python 3, MongoDB, Node ed NPM:
 
-    sudo apt install python3 mongodb npm
-
-Creare un symlink per l'eseguibile di node:
-
-    sudo ln -s /usr/bin/nodejs /usr/bin/node
+    sudo apt install python3 mongodb nodejs-legacy npm 
 
 Installare Harp con NPM:
 
