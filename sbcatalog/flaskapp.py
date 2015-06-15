@@ -18,6 +18,7 @@
 from eve import Eve
 from endpoints import xml_collections_endpoint, geo_collections_endpoint
 
+from pymongo import MongoClient
 
 class XMLEve(Eve):
     """
@@ -53,7 +54,48 @@ class XMLEve(Eve):
                           view_func=geo_collections_endpoint,
                           methods=geo_settings['resource_methods'] + ['OPTIONS'])
 
+        self.on_insert_supplier += before_insert
         # MIGHT BE USEFUL
         # url = '%s/%s' % (self.api_prefix, settings['url'])
         # self.add_url_rule(url, endpoint, view_func=gdxp_collections_endpoint,
         #    methods=settings['resource_methods'] + ['OPTIONS'])
+
+def before_insert(items):
+
+    client = MongoClient('localhost:27017')
+    db = client['sbcatalog']
+    suppliers = db['supplier']
+
+    c_items = items.copy()
+    for item in c_items:
+
+        vatNumber = item['vatNumber'] if item['vatNumber'] is not None else ""
+        taxCode = item['taxCode'] if item['taxCode'] is not None else ""
+        for supplier in suppliers.find({"$or" : [{ "vatNumber":vatNumber}, {"taxCode":taxCode}]}):
+            print(supplier)
+            if(item.get("lastUpdate") > supplier["lastUpdate"]):
+                print("Updating item with name %s" % item.get("name"))
+                suppliers.update(
+                        {"$or" : [{ "vatNumber":vatNumber}, {"taxCode":taxCode}]},
+                        {
+                          '$set': {
+                            "name"        : item.get("name"),
+                            "extraFields" : item.get("extraFields"),
+                            "note"        : item.get("note"),
+                            "vatNumber"   : item.get("vatNumber"),
+                            "contacts"    : item.get("contacts"),
+                            "orders"      : item.get("orders"),
+                            "lastUpdate"  : item.get("lastUpdate"),
+                            "address"     : item.get("address"),
+                            "logo"        : item.get("logo"),
+                            "products"    : item.get("products"),
+                            "taxCode"     : item.get("taxCode")
+                          }
+                        }
+                )
+            #don't save
+            try:
+                items.remove(item)
+            except ValueError:
+                pass
+
