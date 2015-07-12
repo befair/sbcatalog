@@ -3,11 +3,13 @@ import sbcatalog.geomatic
 import xmltodict
 import json
 import codecs
+import os
 
 # Settings
 
 conn = client.HTTPConnection('localhost', 5000)
-supplier_file = 'test_data.gdxp'
+ROOT = os.getenv('ROOT', '/code')
+SUPPLIER_FILE = ROOT + '/sbcatalog/tests/test_data.gdxp'
 
 # Utilities
 
@@ -54,10 +56,10 @@ def check_supplier(supplier):
 def test_01_post_gdxp():
     """ POST test for importing gdxp suppliers data """
     try:
-        with codecs.open(supplier_file, 'r', 'utf-8') as f:
+        with codecs.open(SUPPLIER_FILE, 'r', 'utf-8') as f:
             xml = f.read().encode('utf-8')
     except IOError:
-        assert False, "%s not found" % supplier_file
+        assert False, "%s not found" % SUPPLIER_FILE
     conn.request('POST', '/gdxp/supplier', xml, {'Content-type': 'text/xml'})
     r = conn.getresponse()
     assertCode(r, 201)
