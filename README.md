@@ -1,5 +1,7 @@
 # Social Business Catalog
 
+[![Build Status](https://travis-ci.org/befair/sbcatalog.svg?branch=master)](https://travis-ci.org/befair/sbcatalog)
+
 [Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API
 per fornitori e prodotti dell'economia solidale.
 
@@ -62,7 +64,7 @@ Grazie a tutti quelli che ci provano
 
 Su Debian/Ubuntu, installare Python 3, MongoDB, Node ed NPM:
 
-    sudo apt install python3 mongodb nodejs-legacy npm 
+    sudo apt install python3 mongodb nodejs-legacy npm
 
 Installare Harp con NPM:
 
