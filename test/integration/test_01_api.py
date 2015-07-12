@@ -1,15 +1,17 @@
 from http import client
-import sbcatalog.geomatic
-import xmltodict
 import json
+
+import xmltodict
 import codecs
 
-# Settings
+import api.geomatic
+from settings import *
 
-conn = client.HTTPConnection('localhost', 5000)
-supplier_file = 'test_data.gdxp'
 
 # Utilities
+
+def open_connection():
+    return client.HTTPConnection(NGINX_HOST, NGINX_PORT)
 
 
 def assertCode(response, expected_code=200):
@@ -48,25 +50,31 @@ def check_supplier(supplier):
     assert supplier['address']['locality'] == "Matelica"
     assert supplier['address']['zipcode'] == "62024"
 
+
 # Tests
+
+# before starting the tests we open a connection
+# that will be shared among tests
+conn = open_connection()
 
 
 def test_01_post_gdxp():
     """ POST test for importing gdxp suppliers data """
     try:
-        with codecs.open(supplier_file, 'r', 'utf-8') as f:
+        with codecs.open(SUPPLIER_FILE, 'r', 'utf-8') as f:
             xml = f.read().encode('utf-8')
     except IOError:
-        assert False, "%s not found" % supplier_file
-    conn.request('POST', '/gdxp/supplier', xml, {'Content-type': 'text/xml'})
+        assert False, "%s not found" % SUPPLIER_FILE
+    conn.request('POST', '/api/v1/gdxp/supplier', xml, {'Content-type': 'text/xml'})
     r = conn.getresponse()
     assertCode(r, 201)
+    r.read()
 
 
 def test_02_get_json():
     """ GET test for exporting suppliers data in json format """
-    # test GET /supplier
-    conn.request('GET', '/supplier')
+    # test GET /api/v1/supplier
+    conn.request('GET', '/api/v1/supplier')
     data = elaborate_response_json()
 
     # check supplier data
@@ -76,8 +84,8 @@ def test_02_get_json():
 
 def test_03_get_gdxp():
     """ GET test for exporting suppliers data in gxdp format """
-    # test GET /gdxp/supplier
-    conn.request('GET', '/gdxp/supplier/', headers={'Content-type': 'text/xml'})
+    # test GET /api/v1/gdxp/supplier
+    conn.request('GET', '/api/v1/gdxp/supplier/', headers={'Content-type': 'text/xml'})
     data = elaborate_response()
 
     # check supplier data
@@ -87,16 +95,21 @@ def test_03_get_gdxp():
 
 def test_04_geo_api():
     """ Data generation and GET test for geo API """
-    # test geodb generation
-    sbcatalog.geomatic.update_geo_db()
+    conn.close()
 
-    # test GET /geo/supplier
-    conn.request('GET', '/geo/supplier')
+    # test geodb generation
+    api.geomatic.update_geo_db()
+
+    # we refresh our connection before making a new request
+    global conn
+    conn = open_connection()
+
+    # test GET /api/v1/geo/supplier
+    conn.request('GET', '/api/v1/geo/supplier')
     data = elaborate_response_json()
     item = get_item(data)
 
     # check data
     assert item['address'] == "Matelica 62024 Loc. campochiesa, 6"
-    # assert item['webSite'] == "http://www.cantinaprimadiesanatoglia.it/"
     assert item['name'] == "Acquaterra"
     assert item['coords'] == [13.00948, 43.2565867]
