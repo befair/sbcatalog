@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 # This file is part of sbcatalog
 #
 # sbcatalog is Copyright © 2015 beFair.it
