@@ -1,6 +1,6 @@
 # Social Business Catalog
 
-[![Build Status](https://travis-ci.org/kobe25/sbcatalog.svg?branch=master)](https://travis-ci.org/kobe25/sbcatalog)
+[![Build Status](https://travis-ci.org/befair/sbcatalog.svg?branch=master)](https://travis-ci.org/befair/sbcatalog)
 
 [Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API
 per fornitori e prodotti dell'economia solidale.
@@ -74,7 +74,7 @@ Per i prerequisiti vedere [qui](https://github.com/kobe25/apps/blob/master/docs/
 
 Clonare il progetto:
 
-    $ git clone https://github.com/kobe25/sbcatalog && cd sbcatalog
+    $ git clone https://github.com/befair/sbcatalog && cd sbcatalog
 
 Lanciare l'intera applicazione in background:
 
