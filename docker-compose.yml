@@ -1,0 +1,36 @@
+test:
+  image: kobe25/sbcatalog-test:latest
+  volumes:
+    - ./test:/code/test:ro
+  volumes_from:
+    - back
+  links:
+    - proxy
+    - db
+
+proxy:
+  image: nginx:1.9
+  volumes:
+    - ./proxy:/etc/nginx/conf.d:ro
+  ports:
+    - '127.0.0.1:8080:80'
+    - '127.0.0.1:8443:443'
+  links:
+    - front
+    - back
+  restart: on-failure:3
+
+front:
+  image: kobe25/sbcatalog-front:latest
+  volumes:
+    - ./ui:/code/ui:rw
+
+back:
+  image: kobe25/sbcatalog-back:latest
+  volumes:
+    - ./api:/code/api:ro
+  links:
+    - db
+
+db:
+  image: mongo:2.4

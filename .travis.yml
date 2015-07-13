@@ -1,0 +1,22 @@
+sudo: false
+language: python
+python: '3.4'
+services: mongodb
+addons:
+  hosts:
+    - proxy
+    - back
+    - front
+    - db
+env:
+  global:
+    NGINX_PORT: '8080'
+    ROOT: $(pwd)
+    PYTHONPATH: $(pwd):$PYTHONPATH
+
+install: pip install -r api/deps/dev.txt
+before_script: api/run.py &
+
+script: py.test test/integration
+
+after_script: killall run.py

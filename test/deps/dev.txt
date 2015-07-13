@@ -1,0 +1,5 @@
+pytest
+ipython
+Eve
+xmltodict
+geocoder

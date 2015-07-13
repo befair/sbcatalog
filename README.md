@@ -1,5 +1,7 @@
 # Social Business Catalog
 
+[![Build Status](https://travis-ci.org/befair/sbcatalog.svg?branch=master)](https://travis-ci.org/befair/sbcatalog)
+
 [Social Business Catalog (beta)](http://sbcatalog.labs.befair.it) è un aggregatore, una vetrina ed una API
 per fornitori e prodotti dell'economia solidale.
 
@@ -56,47 +58,53 @@ Grazie a tutti quelli che ci provano
 
 [Il team beFair](http://www.befair.it)
 
-## Prerequisiti
+## Quickstart
 
-È richiesto Python 3.4+, quindi Debian 8+, Ubuntu 14.04+ o Arch.
+L'applicazione consiste di 5 container:
 
-Su Debian/Ubuntu, installare Python 3, MongoDB, Node ed NPM:
+* `test`:  per lanciare i test integration+e2e verso il `proxy`
+* `proxy`:  *NGiNX* che indirizza le richieste a `front` e `back`
+* `front`:  *HarpJS* fornisce la web UI
+* `back`:  *uWSGI* serve l'API server *Flask/Eve*
+* `db`:  *MongoDB*
 
-    sudo apt install python3 mongodb nodejs-legacy npm 
+### Installazione
 
-Installare Harp con NPM:
+Per i prerequisiti vedere [qui](https://github.com/kobe25/apps/blob/master/docs/install.md)
 
-    sudo npm install -g harp
+Clonare il progetto:
 
-## Installazione
+    $ git clone https://github.com/befair/sbcatalog && cd sbcatalog
 
-### Server
+Lanciare l'intera applicazione in background:
 
-    $ pip install -r requirements/dev.txt
-    $ cd sbcatalog
-    $ cp settings_dist.py settings.py
-    $ ./run.py
+    $ make up
 
-### Client
+La prima volta questa operazione richiedera' alcuni minuti.
 
-    $ cd frontend
-    $ harp server
-    $ firefox http://localhost:9000
+Infine andare su:
 
-Se il server risiede in un dominio remoto settare la `apiBaseUrl` correttamente:
+* [`localhost:8080/`](http://localhost:8080/)
+* [`localhost:8080/api/v1/`](http://localhost:8080/api/v1/)
 
-    $ echo '{ "apiBaseUrl" : "http://example.org" }' > frontend/settings.json
+Per i principali comandi:
 
-Per esempio:
+    $ make help
 
-    $ echo '{ "apiBaseUrl" : "http://sbcatalog.labs.befair.it/api" }' > frontend/settings.json
+## Utilizzo
+
+### Configurazioni
+
+Se il server risiede in un dominio remoto settare la `apiBaseUrl` correttamente, ad esempio:
+
+    $ echo '{ "apiBaseUrl" : "http://sbcatalog.labs.befair.it/api" }' > ui/settings.json
 
 ### Aggiornamento Geodatabase
 
 Per generare un elenco di fornitori georeferenziati (utilizzati dalla mappa di sbcatalog):
 
-	$ cd sbcatalog
-	$ ./run.py update-geodb
+  $ make back
+	# ./run.py update-geodb
 
 Per la `georeferenziazione` viene utilizzato [Open Street Map](http://www.openstreetmap.org/about/).
 
@@ -106,29 +114,32 @@ Tramite API è possibile interagire con il database dei fornitori in questo modo
 
 1. Inserire nuovi fornitori con i relativi cataloghi prodotti:
 
-    `$ curl -XPOST -d @<file.gdxp> -H "Content-type: text/xml" http://localhost:5000/gdxp/supplier/`
+    `$ curl -XPOST -d @<file.gdxp> -H "Content-type: text/xml" http://localhost:8080/api/v1/gdxp/supplier/`
 
 2. Scaricare tutti i fornitori e i cataloghi prodotti in formato GDXP:
 
-    `$ curl -XGET -H "Content-type: text/xml" http://localhost:5000/gdxp/supplier/`
+    `$ curl -XGET -H "Content-type: text/xml" http://localhost:8080/api/v1/gdxp/supplier/`
 
 3. Scaricare tutti i fornitori e i cataloghi prodotti in formato JSON:
 
-    `$ curl -XGET -H "Content-type: application/json" http://localhost:5000/supplier/`
+    `$ curl -XGET -H "Content-type: application/json" http://localhost:8080/api/v1/supplier/`
 
 4. Scaricare le informazioni geomatiche (coordinate, indirizzo, nome) dei fornitori:
 
-    `$ curl -XGET -H "Content-type: application/json" http://localhost:5000/geo/supplier/`
+    `$ curl -XGET -H "Content-type: application/json" http://localhost:8080/api/v1/geo/supplier/`
 
-Per usare le API della piattaforma ufficiale di produzione di sbcatalog, sostituire `http://localhost:5000` con `http://sbcatalog.labs.befair.it/api`.
+Per usare le API della piattaforma ufficiale di produzione di sbcatalog, sostituire `http://localhost:8080/api/v1` con `http://sbcatalog.labs.befair.it/api`.
 
 ## Test
 
-Per lanciare i test:
+Per lanciare specifici test:
 
-    $ pip install -r requirements/dev.txt
-    $ cd sbcatalog/tests
-    $ py.test
+    $ make test-unit
+    $ make test-integration
+
+Per lanciare tutti i test:
+
+    $ make test
 
 ## Autori
 
