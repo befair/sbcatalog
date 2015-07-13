@@ -70,7 +70,7 @@ L'applicazione consiste di 5 container:
 
 ### Installazione
 
-Per i prerequisiti vedere [qui](https://github.com/kobe25/apps/blob/master/docs/install.md)
+Per i prerequisiti vedere [qui](https://github.com/kobe25/devops/blob/master/docs/install.md)
 
 Clonare il progetto:
 

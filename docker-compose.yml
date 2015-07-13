@@ -1,5 +1,5 @@
 test:
-  image: kobe25/sbcatalog-test:latest
+  image: befair/sbcatalog-test:latest
   volumes:
     - ./test:/code/test:ro
   volumes_from:
@@ -21,12 +21,12 @@ proxy:
   restart: on-failure:3
 
 front:
-  image: kobe25/sbcatalog-front:latest
+  image: befair/sbcatalog-front:latest
   volumes:
     - ./ui:/code/ui:rw
 
 back:
-  image: kobe25/sbcatalog-back:latest
+  image: befair/sbcatalog-back:latest
   volumes:
     - ./api:/code/api:ro
   links:
