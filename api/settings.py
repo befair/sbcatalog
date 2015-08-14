@@ -2,7 +2,7 @@ import os
 
 
 # General settings
-ENV = os.getenv('ENV', 'dev')
+ENV = os.getenv('APP_ENV', 'dev')
 
 if ENV == 'dev':
     DEBUG = True
