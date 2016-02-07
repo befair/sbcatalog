@@ -70,8 +70,6 @@ L'applicazione consiste di 5 container:
 
 ### Installazione
 
-Per i prerequisiti vedere [qui](https://github.com/kobe25/devops/blob/master/docs/install.md)
-
 Clonare il progetto:
 
     $ git clone https://github.com/befair/sbcatalog && cd sbcatalog
