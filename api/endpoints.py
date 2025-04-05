@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from eve.endpoints import collections_endpoint, _resource
-from eve.utils import request_method, config
+from eve.utils import config
 from eve.methods.post import post_internal
 from eve.render import send_response
 
@@ -38,7 +38,7 @@ def popper(d):
 def xml_collections_endpoint(**lookup):
     resource = _resource()
     response = None
-    method = request_method()
+    method = request.method
     if request.content_type.endswith("/xml"):
         if method == "POST":
             # response = post(resource, payl=xml2json(request.data))

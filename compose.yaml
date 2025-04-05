@@ -2,7 +2,8 @@ version: '3.9'
 
 services:
   test:
-    image: befair/sbcatalog-test:latest
+    # image: befair/sbcatalog-test:latest
+    build: ./test/
     volumes:
       - ./test:/code/test:ro
       # Replicate the mount that "back" had:
@@ -18,26 +19,26 @@ services:
     ports:
       - '127.0.0.1:8080:80'
       - '127.0.0.1:8443:443'
-    # links are optional; services can resolve each other by name:
     depends_on:
       - front
       - back
     restart: on-failure
 
   front:
-    image: befair/sbcatalog-front:latest
+    build: ./ui/
+    # image: befair/sbcatalog-front:latest
     volumes:
       - ./ui:/code/ui:rw
 
   back:
-    image: befair/sbcatalog-back:latest
+    # image: befair/sbcatalog-back:latest
+    build: ./api/
     volumes:
       - ./api:/code/api:ro
-    # links can be omitted since "db" is reachable by name:
     depends_on:
       - db
     env_file: ./settings.env
 
   db:
-    image: mongo:2.4
+    image: mongo:latest
 

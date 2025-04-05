@@ -1,9 +1,9 @@
-FROM iojs:2.3
+FROM node:current-alpine3.21
 
-MAINTAINER Antonio Esposito "kobe@befair.it"
+MAINTAINER Luca Ferroni "luca@befair.it"
 
 COPY . /code/ui
 RUN npm install -g $(cat /code/ui/deps/npm)
 
 EXPOSE 5000
-CMD ["harp", "server", "-i", "0.0.0.0", "-p", "5000", "/code"]
+CMD ["harp", "/code", "--host", "0.0.0.0", "--port", "5000"]

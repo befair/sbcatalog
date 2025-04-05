@@ -291,7 +291,7 @@ supplier = {
     # additional read-only entry point. This way consumers can also perform
     # GET requests at '/people/<lastname>'.
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': r'regex("[\w]+")',
         'field': 'name'
     },
 

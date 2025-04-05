@@ -151,7 +151,7 @@ Per lanciare tutti i test:
 
 ## License
 
-Social Business Catalog is Copyright © 2015 beFair.it
+Social Business Catalog is Copyright © 2025 beFair.it
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License version 3, as published by

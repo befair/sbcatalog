@@ -1,6 +1,6 @@
-FROM kobe25/uwsgi-python:latest
+FROM befair/uwsgi-python:latest
 
-MAINTAINER Antonio Esposito "kobe@befair.it"
+MAINTAINER Luca Ferroni "luca@befair.it"
 
 ENV UWSGI_CHDIR     /code/api
 ENV UWSGI_WSGI_FILE /code/api/run.py
