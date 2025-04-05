@@ -16,51 +16,51 @@ help:
 	@echo 'make back       Debug in backend via iPython'
 
 up:
-	@docker-compose up -d
-	@docker-compose ps
+	@docker compose up -d
+	@docker compose ps
 
 logs log:
-	@docker-compose logs
+	@docker compose logs
 
 logs-back log-back:
-	@docker-compose logs back
+	@docker compose logs back
 
 start:
-	@docker-compose start
-	@docker-compose ps
+	@docker compose start
+	@docker compose ps
 
 stop:
-	@docker-compose stop
-	@docker-compose ps
+	@docker compose stop
+	@docker compose ps
 
 restart:
-	@docker-compose restart
-	@docker-compose ps
+	@docker compose restart
+	@docker compose ps
 
 ps:
-	@docker-compose ps
+	@docker compose ps
 
 t:
-	@docker-compose run --rm test /bin/bash
+	@docker compose run --rm test /bin/bash
 
 front fe frontend ui:
-	@docker-compose run --rm front /bin/bash
+	@docker compose run --rm front /bin/bash
 
 back be backend api:
-	@docker-compose run --rm back /bin/bash
+	@docker compose run --rm back /bin/bash
 
 shell:
-	@docker-compose run --rm back ipython
+	@docker compose run --rm back ipython
 
 update-geodb:
-	@docker-compose run --rm back /code/api/run.py update-geodb
+	@docker compose run --rm back /code/api/run.py update-geodb
 
 rmall: rm rmc rmi
 	@echo 'All containers/images removed!'
 
 rm:
-	@docker-compose stop
-	@docker-compose rm -f
+	@docker compose stop
+	@docker compose rm -f
 	@docker rmi -f befair/sbcatalog-{test,front,back}
 
 rmc:
@@ -76,4 +76,4 @@ test-unit:
 	@echo 'TODO: unit test'
 
 test-integration:
-	@docker-compose run test py.test /code/test/integration
+	@docker compose run test py.test /code/test/integration

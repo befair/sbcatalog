@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  test:
+    image: befair/sbcatalog-test:latest
+    volumes:
+      - ./test:/code/test:ro
+      # Replicate the mount that "back" had:
+      - ./api:/code/api:ro
+    depends_on:
+      - proxy
+      - db
+
+  proxy:
+    image: nginx:latest
+    volumes:
+      - ./proxy:/etc/nginx/conf.d:ro
+    ports:
+      - '127.0.0.1:8080:80'
+      - '127.0.0.1:8443:443'
+    # links are optional; services can resolve each other by name:
+    depends_on:
+      - front
+      - back
+    restart: on-failure
+
+  front:
+    image: befair/sbcatalog-front:latest
+    volumes:
+      - ./ui:/code/ui:rw
+
+  back:
+    image: befair/sbcatalog-back:latest
+    volumes:
+      - ./api:/code/api:ro
+    # links can be omitted since "db" is reachable by name:
+    depends_on:
+      - db
+    env_file: ./settings.env
+
+  db:
+    image: mongo:2.4
+
