@@ -49,6 +49,9 @@ front fe frontend ui:
 back be backend api:
 	@docker compose run --rm back /bin/bash
 
+mongo:
+	@docker compose run --rm db mongosh
+
 shell:
 	@docker compose run --rm back ipython
 

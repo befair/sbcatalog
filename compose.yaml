@@ -16,6 +16,7 @@ services:
     image: nginx:latest
     volumes:
       - ./proxy:/etc/nginx/conf.d:ro
+      - ./sbcatalog_media:/var/www/sbcatalog_media/
     ports:
       - '127.0.0.1:8080:80'
       - '127.0.0.1:8443:443'

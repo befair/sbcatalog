@@ -1,15 +1,20 @@
+import time
+from geopy.geocoders import Nominatim
 import geocoder
 import json
 from pymongo import MongoClient
+
 from settings import MONGO_HOST, MONGO_PORT
 
+
 def get_addresses(verbose=False):
+    geolocator = Nominatim(user_agent="SBCatalog/0.9 (dev@befair.it)")
     with MongoClient(MONGO_HOST, MONGO_PORT) as client:
         coll = client['sbcatalog']['supplier']
         suppliers_in = coll.find()
 
         suppliers_out = []
-        for s in suppliers_in:
+        for c, s in enumerate(suppliers_in):
             success = False
             x = {}
             x['name'] = s.get('name')
@@ -21,40 +26,43 @@ def get_addresses(verbose=False):
                     address_parts.append(a[k])
             address = " ".join(address_parts)
             if verbose:
-                print('Trying full address: "' + address + '"', end=' ')
-            # Try full address first.
-            result = geocoder.osm(address)
-            result_json = result.json
-            if result_json.get('status') == 'OK' and result_json.get('country') == 'Italia':
-                success = True
-            # If not successful, try using only the locality.
-            elif a.get('locality'):
-                if verbose:
-                    print('NOT FOUND! Trying locality: "' + a.get('locality') + '"', end=' ')
-                result = geocoder.osm(a.get('locality'))
-                result_json = result.json
-                success = result_json.get('status') == 'OK' and result_json.get('country') == 'Italia'
+                print('Trying full address: "' + address + '"', end='\n')
 
-            if success:
-                if verbose:
-                    print('OK!')
-                # Get coordinates from the result.
-                geometry = result_json.get('geometry', {})
-                x['coords'] = geometry.get('coordinates')
-                x['address'] = address
-                # Extract webSite from nested contacts.
-                webSite = (
-                    s.get('contacts', {})
-                     .get('contact', {})
-                     .get('primary', {})
-                     .get('webSite')
-                )
-                if webSite:
-                    x['webSite'] = webSite
-                suppliers_out.append(x)
-            else:
-                if verbose:
-                    print('FAILED!')
+            try:
+                # Try full address first.
+                location = geolocator.geocode(address)
+                if location is None:
+                    # If not successful, try using only the locality.
+                    if a.get('locality'):
+                        if verbose:
+                            print('NOT FOUND! Trying locality: "' + a.get('locality') + '"', end=' ')
+                        location = geolocator.geocode(a.get('locality'))
+
+                if location is not None:
+                    if verbose:
+                        print('OK!')
+                    # Get coordinates from the result.
+                    x['coords'] = (location.longitude, location.latitude)
+                    x['address'] = address
+                    # Extract webSite from nested contacts.
+                    webSite = (
+                        s.get('contacts', {})
+                         .get('contact', {})
+                         .get('primary', {})
+                         .get('webSite')
+                    )
+                    if webSite:
+                        x['webSite'] = webSite
+                    suppliers_out.append(x)
+                else:
+                    if verbose:
+                        print('FAILED!')
+            except Exception as e:
+                print(f"ERROR {c=}: {e}")
+                if c >= 10:
+                    break
+            time.sleep(1.2)
+                
     return suppliers_out
 
 def update_geo_db(verbose=False):

@@ -42,7 +42,7 @@ def xml2json(xmlstring):
 
     # remove root element and take away root attributes
     root_attrs = {}
-    for k, v in d.items():
+    for k, v in list(d.items()):
         if k.startswith('@'):
             root_attrs[k] = d.pop(k)
 
